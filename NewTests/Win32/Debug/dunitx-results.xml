@@ -1,0 +1,117 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<test-results name="C:\_work11\NewTests\Win32\Debug\BookCatalogTests.exe" total="23" errors="6" failures="0" ignored="0" inconclusive="0" not-run="0" skipped="0" invalid="0" date="2025-02-09" time="2004.113">
+  <culture-info current-culture="en" current-uiculture="en" />
+  <test-suite type="Assembly" name="BookCatalogTests.exe" executed="true" result="Failure" success="False" time="2004.113" asserts="0">
+    <results>
+        <test-suite type="Namespace" name="JSONUtils_Tests" executed="true" result="Success" success="True" time="2004.113" asserts="0" >
+          <results>
+              <test-suite type="Fixture" name="TJSONUtilsTests" executed="True" result="Success" success="True" time="2004.113" >
+                <results>
+                  <test-case name="TestSortJSONFields_SimpleObject" executed="True" result="Success" success="True" time="0.000" asserts="0" />
+                  <test-case name="TestSortJSONFields_NestedObject" executed="True" result="Success" success="True" time="0.000" asserts="0" />
+                  <test-case name="TestSortJSONFields_ArrayOfObjects" executed="True" result="Success" success="True" time="0.000" asserts="0" />
+                  <test-case name="TestSortJSONFields_SimpleArray" executed="True" result="Success" success="True" time="0.000" asserts="0" />
+                  <test-case name="TestSortJSONFields_InvalidJSON" executed="True" result="Success" success="True" time="0.000" asserts="0" />
+                </results>
+              </test-suite>
+          </results>
+        </test-suite>
+        <test-suite type="Namespace" name="StringUtils_tests" executed="true" result="Success" success="True" time="2004.101" asserts="0" >
+          <results>
+              <test-suite type="Fixture" name="TStringUtilsTests" executed="True" result="Success" success="True" time="2004.101" >
+                <results>
+                  <test-case name="TestSortJSONFields" executed="True" result="Success" success="True" time="0.000" asserts="0" />
+                  <test-case name="TestSortJSONFields_Nested" executed="True" result="Success" success="True" time="0.000" asserts="0" />
+                  <test-case name="TestTrimString" executed="True" result="Success" success="True" time="0.000" asserts="0" />
+                  <test-case name="TestToUpperCaseString" executed="True" result="Success" success="True" time="0.000" asserts="0" />
+                  <test-case name="TestToLowerCaseString" executed="True" result="Success" success="True" time="0.000" asserts="0" />
+                  <test-case name="TestIsNumeric" executed="True" result="Success" success="True" time="0.000" asserts="0" />
+                  <test-case name="TestIsAlpha" executed="True" result="Success" success="True" time="0.000" asserts="0" />
+                  <test-case name="TestIsAlphaNumeric" executed="True" result="Success" success="True" time="0.000" asserts="0" />
+                  <test-case name="TestReplaceSubstring" executed="True" result="Success" success="True" time="0.000" asserts="0" />
+                </results>
+              </test-suite>
+          </results>
+        </test-suite>
+        <test-suite type="Namespace" name="Unit1" executed="true" result="Success" success="True" time="2004.050" asserts="0" >
+          <results>
+              <test-suite type="Fixture" name="TMyTestObject" executed="True" result="Success" success="True" time="2004.050" >
+                <results>
+                  <test-case name="Test1" executed="True" result="Success" success="True" time="0.000" asserts="0" />
+                  <test-case name="Test2.TestA" executed="True" result="Success" success="True" time="0.000" asserts="0" />
+                  <test-case name="Test2.TestB" executed="True" result="Success" success="True" time="0.000" asserts="0" />
+                </results>
+              </test-suite>
+          </results>
+        </test-suite>
+        <test-suite type="Namespace" name="BaseEntityStorage_Tests" executed="true" result="Success" success="True" time="2004.031" asserts="0" >
+          <results>
+              <test-suite type="Fixture" name="TBaseEntityStorageTests" executed="True" result="Success" success="True" time="2004.031" >
+                <results>
+                  <test-case name="TestCreateEntity" executed="True" result="Error" success="False" time="81.057" asserts="0" >
+                    <failure>
+                      <message>
+                        <![CDATA[ Invalid pointer operation ]]>
+                      </message>
+                      <stack-trace>
+                        <![CDATA[  ]]>
+                      </stack-trace>
+                    </failure>
+                  </test-case>
+                  <test-case name="TestReadEntity" executed="True" result="Error" success="False" time="0.001" asserts="0" >
+                    <failure>
+                      <message>
+                        <![CDATA[ Invalid pointer operation ]]>
+                      </message>
+                      <stack-trace>
+                        <![CDATA[  ]]>
+                      </stack-trace>
+                    </failure>
+                  </test-case>
+                  <test-case name="TestUpdateEntity" executed="True" result="Error" success="False" time="0.001" asserts="0" >
+                    <failure>
+                      <message>
+                        <![CDATA[ Invalid pointer operation ]]>
+                      </message>
+                      <stack-trace>
+                        <![CDATA[  ]]>
+                      </stack-trace>
+                    </failure>
+                  </test-case>
+                  <test-case name="TestDeleteEntity" executed="True" result="Error" success="False" time="0.009" asserts="0" >
+                    <failure>
+                      <message>
+                        <![CDATA[ Access violation at address 008CCC00 in module 'BookCatalogTests.exe'. Read of address FFFFFFFD ]]>
+                      </message>
+                      <stack-trace>
+                        <![CDATA[  ]]>
+                      </stack-trace>
+                    </failure>
+                  </test-case>
+                  <test-case name="TestGetAllEntities" executed="True" result="Error" success="False" time="0.000" asserts="0" >
+                    <failure>
+                      <message>
+                        <![CDATA[ Invalid pointer operation ]]>
+                      </message>
+                      <stack-trace>
+                        <![CDATA[  ]]>
+                      </stack-trace>
+                    </failure>
+                  </test-case>
+                  <test-case name="TestEntityPersistence" executed="True" result="Error" success="False" time="0.000" asserts="0" >
+                    <failure>
+                      <message>
+                        <![CDATA[ Invalid pointer operation ]]>
+                      </message>
+                      <stack-trace>
+                        <![CDATA[  ]]>
+                      </stack-trace>
+                    </failure>
+                  </test-case>
+                </results>
+              </test-suite>
+          </results>
+        </test-suite>
+    </results>
+  </test-suite>
+</test-results>

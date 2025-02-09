@@ -1,0 +1,72 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{1DD30623-444F-444B-BC08-33F38FF9B8E2}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="BookCatalogTests.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="..\bookCatalog\bookCatalog.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="ENG\BookCatalogTests_ENG.bdsproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="RUS\BookCatalogTests_RUS.bdsproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="BookCatalogTests">
+        <MSBuild Projects="BookCatalogTests.dproj"/>
+    </Target>
+    <Target Name="BookCatalogTests:Clean">
+        <MSBuild Projects="BookCatalogTests.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="BookCatalogTests:Make">
+        <MSBuild Projects="BookCatalogTests.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="bookCatalog">
+        <MSBuild Projects="..\bookCatalog\bookCatalog.dproj"/>
+    </Target>
+    <Target Name="bookCatalog:Clean">
+        <MSBuild Projects="..\bookCatalog\bookCatalog.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="bookCatalog:Make">
+        <MSBuild Projects="..\bookCatalog\bookCatalog.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="BookCatalogTests_ENG">
+        <MSBuild Projects="ENG\BookCatalogTests_ENG.bdsproj"/>
+    </Target>
+    <Target Name="BookCatalogTests_ENG:Clean">
+        <MSBuild Projects="ENG\BookCatalogTests_ENG.bdsproj" Targets="Clean"/>
+    </Target>
+    <Target Name="BookCatalogTests_ENG:Make">
+        <MSBuild Projects="ENG\BookCatalogTests_ENG.bdsproj" Targets="Make"/>
+    </Target>
+    <Target Name="BookCatalogTests_RUS">
+        <MSBuild Projects="RUS\BookCatalogTests_RUS.bdsproj"/>
+    </Target>
+    <Target Name="BookCatalogTests_RUS:Clean">
+        <MSBuild Projects="RUS\BookCatalogTests_RUS.bdsproj" Targets="Clean"/>
+    </Target>
+    <Target Name="BookCatalogTests_RUS:Make">
+        <MSBuild Projects="RUS\BookCatalogTests_RUS.bdsproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="BookCatalogTests;bookCatalog;BookCatalogTests_ENG;BookCatalogTests_RUS"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="BookCatalogTests:Clean;bookCatalog:Clean;BookCatalogTests_ENG:Clean;BookCatalogTests_RUS:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="BookCatalogTests:Make;bookCatalog:Make;BookCatalogTests_ENG:Make;BookCatalogTests_RUS:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>

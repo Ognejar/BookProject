@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>1899.12.30 00:00:00.000.011,=C:\_work11\NewTests\Unit2.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.431,=C:\_work11\NewTests\StringUtils_tests.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.870,=C:\_work11\bookCatalog\app\services\utils\ArrayUtils.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.051,C:\_work11\tests\StringUtils_tests.pas=</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.837,=C:\_work11\tests\StringUtils_tests.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.178,=C:\_work11\bookCatalog\app\services\utils\StringUtils.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.622,C:\_work11\NewTests\Unit1.pas=C:\_work11\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.546,=C:\_work11\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.949,C:\_work11\NewTests\BookCatalogTests.dproj=C:\_work11\Project2.dproj</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.632,C:\_work11\NewTests\JSONUtils_Tests.pas=C:\_work11\NewTests\Unit2.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.886,=C:\_work11\bookCatalog\app\services\utils\JSONUtils.pas</Transaction>
+    <Transaction>2025.02.09 08:25:20.833,=C:\_work11\bookCatalog\app\Entities\BaseEntityStorage.pas</Transaction>
+    <Transaction>2025.02.09 09:43:44.662,=C:\_work11\NewTests\Unit2.pas</Transaction>
+    <Transaction>2025.02.09 09:44:40.174,C:\_work11\NewTests\BaseEntityStorage_Tests.pas=C:\_work11\NewTests\Unit2.pas</Transaction>
+  </Transactions>
+</BorlandProject>
