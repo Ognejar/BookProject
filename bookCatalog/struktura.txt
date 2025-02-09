@@ -1,0 +1,294 @@
+111.txt
+222.php
+Data
+Doxyfile
+Doxyfile.old
+Image1.jpg
+Kommentarii 3.md
+Kommentarii 3.odt
+Kommentarii 3.pdf
+Kommentarii 3.txt
+Project1.xml
+Win32
+  ├── Debug
+    ├── Data
+    ├── bookCatalog.exe
+    ├── config.ini
+    ├── logs
+      ├── catalog.log
+app
+  ├── Entities
+    ├── AuthorTypes.pas
+    ├── BaseEntityStorage.pas
+    ├── BookTypes.pas
+    ├── BriefTypes.pas
+    ├── CategoryTypes.pas
+    ├── ListTypes.pas
+    ├── PublisherTypes.pas
+    ├── SeriesTypes.pas
+  ├── GPATH
+  ├── GRTAGS
+  ├── GTAGS
+  ├── Model
+    ├── AuthorModel.pas
+    ├── AuthorTypes.pas
+    ├── BaseEntityStorage.md
+    ├── BaseEntityStorage.pas
+    ├── BaseEntityStorage.pas.txt
+    ├── BookModel.pas
+    ├── BookTypes.pas
+    ├── CategoryModel.pas
+    ├── CommonTypes.pas
+    ├── ListTypes.pas
+    ├── Model.pas
+    ├── PublisherModel.pas
+    ├── PublisherTypes.pas
+    ├── SeriesModel.pas
+    ├── SeriesTypes.pas
+    ├── SettingsTypes.pas
+    ├── Типы.txt
+  ├── Storage
+    ├── AuthorStorage.pas
+    ├── BookBriefStorage.pas
+    ├── BookMetadataStorage.pas
+    ├── CategoryStorage.pas
+    ├── PublisherStorage.pas
+    ├── SeriesStorage.pas
+  ├── controllers
+    ├── BookController.pas
+    ├── CatalogController.pas
+    ├── Controller.pas
+  ├── services
+    ├── BookStorage.pas
+    ├── KeyManager.md
+    ├── KeyManager.pas
+    ├── Logger.pas
+    ├── Logger.pas0
+    ├── config
+      ├── 1Config.pas
+      ├── Config.pas
+    ├── i18n
+      ├── I18N.Manager.pas
+      ├── I18N.Provider.JSON.pas
+      ├── I18N.Types.pas
+      ├── README.md
+      ├── i18nUtils.pas
+    ├── utils
+      ├── ArrayUtils.pas
+      ├── StringUtils.pas
+  ├── test
+    ├── BookTypesTEster.pas
+    ├── TestArrayUtils.pas
+    ├── TestBookModel.pas
+    ├── Unit2.dfm
+    ├── Unit2.pas
+  ├── views
+    ├── EditMetadata.dfm
+    ├── EditMetadata.pas
+    ├── EditMetadataForm.dfm
+    ├── EditMetadataForm.pas
+    ├── Main.dfm
+    ├── Main.pas
+    ├── View.pas
+    ├── catalog.dfm
+    ├── catalog.dfm.txt
+    ├── catalog.pas
+    ├── catalog.pas.txt
+bookCatalog.dpr
+bookCatalog.dproj
+bookCatalog.dproj.local
+bookCatalog.exe
+bookCatalog.identcache
+bookCatalog.res
+docs
+  ├── AllClasses.html
+  ├── AllConstants.html
+  ├── AllFunctions.html
+  ├── AllIdentifiers.html
+  ├── AllTypes.html
+  ├── AllUnits.html
+  ├── AllVariables.html
+  ├── ArrayUtils.TArrayUtils.html
+  ├── ArrayUtils.html
+  ├── AuthorModel.TAuthorManipulation.html
+  ├── AuthorModel.html
+  ├── AuthorStorage.TAuthorStorage.html
+  ├── AuthorStorage.html
+  ├── AuthorTypes.TAuthor.html
+  ├── AuthorTypes.html
+  ├── AutorTypes.TAuthor.html
+  ├── AutorTypes.html
+  ├── BaseEntityStorage.TBaseEntity.html
+  ├── BaseEntityStorage.TBaseEntityStorage.html
+  ├── BaseEntityStorage.html
+  ├── BookBriefStorage.TBookBriefStorage.html
+  ├── BookBriefStorage.html
+  ├── BookController.TBookController.html
+  ├── BookController.html
+  ├── BookMetadataStorage.TBookMetadataStorage.html
+  ├── BookMetadataStorage.html
+  ├── BookModel.TBookManipulation.html
+  ├── BookModel.html
+  ├── BookStorage.TBookStorage.html
+  ├── BookStorage.html
+  ├── BookTypes.TBookMetadata.html
+  ├── BookTypes.html
+  ├── BriefTypes.TBookBrief.html
+  ├── BriefTypes.TBookBriefList.html
+  ├── BriefTypes.html
+  ├── CatalogController.TCatalogController.html
+  ├── CatalogController.html
+  ├── CategoryModel.TCategoryManipulation.html
+  ├── CategoryModel.html
+  ├── CategoryStorage.TCategoryStorage.html
+  ├── CategoryStorage.html
+  ├── CategoryTypes.TCategory.html
+  ├── CategoryTypes.html
+  ├── ClassHierarchy.html
+  ├── CommonTypes.TBookSeries.html
+  ├── CommonTypes.TBookSeriesItem.html
+  ├── CommonTypes.html
+  ├── Config.TConfig.html
+  ├── Config.html
+  ├── Controller.TController.html
+  ├── Controller.html
+  ├── EditMetadata.TEditMetadataForm.html
+  ├── EditMetadata.html
+  ├── EditMetadataForm.TForm3.html
+  ├── EditMetadataForm.html
+  ├── I18N.Manager.TI18NManager.html
+  ├── I18N.Manager.html
+  ├── I18N.Provider.JSON.TJSONTranslationProvider.html
+  ├── I18N.Provider.JSON.html
+  ├── I18N.Types.html
+  ├── KeyManager.TKeyManager.html
+  ├── KeyManager.html
+  ├── ListTypes.TBookBrief.html
+  ├── ListTypes.TBookBriefList.html
+  ├── ListTypes.html
+  ├── Logger.TLogger.html
+  ├── Logger.html
+  ├── Main.TMainForm.html
+  ├── Main.html
+  ├── Model.TModel.html
+  ├── Model.html
+  ├── PublisherModel.TPublisherManipulation.html
+  ├── PublisherModel.html
+  ├── PublisherStorage.TPublisherStorage.html
+  ├── PublisherStorage.html
+  ├── PublisherTypes.TPublisher.html
+  ├── PublisherTypes.html
+  ├── SeriesModel.TSeriesManipulation.html
+  ├── SeriesModel.html
+  ├── SeriesStorage.TBookSeriesStorage.html
+  ├── SeriesStorage.html
+  ├── SeriesTypes.TBookSeries.html
+  ├── SeriesTypes.TBookSeriesItem.html
+  ├── SeriesTypes.html
+  ├── SettingsTypes.TSettingMetadata.html
+  ├── SettingsTypes.html
+  ├── StringUtils.html
+  ├── TestArrayUtils.TestTArrayUtils.html
+  ├── TestArrayUtils.html
+  ├── TestBookModel.TestTBookModel.html
+  ├── TestBookModel.html
+  ├── Unit2.TForm2.html
+  ├── Unit2.html
+  ├── View.TCatalogView.html
+  ├── View.html
+  ├── automated.gif
+  ├── catalog.TCatalogForm.html
+  ├── catalog.html
+  ├── doc
+  ├── html
+    ├── bc_s.png
+    ├── bc_sd.png
+    ├── clipboard.js
+    ├── closed.png
+    ├── cookie.js
+    ├── dir_2462b0f8d1396e7a7487ffdb7e137133.html
+    ├── dir_58350e67bb8e851782fd326c678770c8.html
+    ├── dir_8cec0a3876d0952131bf498f346806e6.html
+    ├── dir_9271c54c77d2bf70811a77ed15542f73.html
+    ├── dir_ac04aa91c54f3b4344c242a2c0dba2cf.html
+    ├── dir_beed7f924c9b0f17d4f4a2501a7114aa.html
+    ├── dir_bf0179a8b2c6a9103651ae123918ee5d.html
+    ├── dir_d422163b96683743ed3963d4aac17747.html
+    ├── dir_d4b482e1d7baae269fb4d592cd17169c.html
+    ├── dir_db745690d9aa8799624d1c178dd98c47.html
+    ├── dir_dc174da80912bcbdd5eca1a5dc2fb1f6.html
+    ├── dir_effe5c348e70d16252aa6de5fa9356c9.html
+    ├── doc.svg
+    ├── docd.svg
+    ├── doxygen.css
+    ├── doxygen.svg
+    ├── doxygen_crawl.html
+    ├── dynsections.js
+    ├── folderclosed.svg
+    ├── folderclosedd.svg
+    ├── folderopen.svg
+    ├── folderopend.svg
+    ├── index.html
+    ├── jquery.js
+    ├── minus.svg
+    ├── minusd.svg
+    ├── nav_f.png
+    ├── nav_fd.png
+    ├── nav_g.png
+    ├── nav_h.png
+    ├── nav_hd.png
+    ├── navtree.css
+    ├── navtree.js
+    ├── navtreedata.js
+    ├── navtreeindex0.js
+    ├── open.png
+    ├── plus.svg
+    ├── plusd.svg
+    ├── resize.js
+    ├── search
+      ├── close.svg
+      ├── mag.svg
+      ├── mag_d.svg
+      ├── mag_sel.svg
+      ├── mag_seld.svg
+      ├── search.css
+      ├── search.js
+      ├── searchdata.js
+    ├── splitbar.png
+    ├── splitbard.png
+    ├── sync_off.png
+    ├── sync_on.png
+    ├── tab_a.png
+    ├── tab_ad.png
+    ├── tab_b.png
+    ├── tab_bd.png
+    ├── tab_h.png
+    ├── tab_hd.png
+    ├── tab_s.png
+    ├── tab_sd.png
+    ├── tabs.css
+  ├── i18nUtils.html
+  ├── index.html
+  ├── latex
+    ├── Makefile
+    ├── doxygen.sty
+    ├── etoc_doxygen.sty
+    ├── longtable_doxygen.sty
+    ├── make.bat
+    ├── refman.tex
+    ├── tabu_doxygen.sty
+  ├── legend.html
+  ├── new
+  ├── pasdoc.css
+  ├── private.gif
+  ├── protected.gif
+  ├── public.gif
+  ├── published.gif
+find_pas_files.php
+generate_tree.php
+makedoc.cmd
+pasdoc.cfg
+project.pasdoc
+showdoc.cmd
+struktura.txt
+Библиотека дементора.xml

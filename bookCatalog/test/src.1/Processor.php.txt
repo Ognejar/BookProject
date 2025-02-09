@@ -1,0 +1,78 @@
+<?php
+
+class Processor {
+    private $fileScanner;
+    private $parser;
+    private $markdownGenerator;
+    private $outputDir;
+    private $logFile;
+
+    public function __construct($outputDir, $logFile = 'php_doc.log') {
+        $this->fileScanner = new FileScanner();
+        $this->parser = new Parser();
+        $this->markdownGenerator = new MarkdownGenerator();
+        $this->outputDir = $outputDir;
+        $this->logFile = $logFile;
+
+        // Проверка, что лог-файл доступен для записи
+        if (!file_put_contents($this->logFile, "Лог-файл успешно создан.\n", FILE_APPEND | LOCK_EX)) {
+            // Если не удалось создать лог-файл, выбрасываем исключение
+            throw new Exception("Не удалось создать лог-файл: $this->logFile");
+        }
+    }
+
+    public function processDirectory($directory) {
+        $files = $this->fileScanner->scanDirectory($directory);
+        foreach ($files as $fileInfo) {
+            $file = $fileInfo['path'];
+            $relativePath = $fileInfo['relativePath'];
+            $moduleName = pathinfo($file, PATHINFO_FILENAME); // Имя модуля = имя файла без расширения
+
+            // Выводим имя файла в лог
+            error_log("\n\nОбрабатываем файл: $relativePath", 3, $this->logFile);
+
+            $parsedData = $this->parser->parseFile($file);
+            $comments = $parsedData['comments'];
+            $programInterface = $parsedData['programInterface'];
+
+            if (empty($comments) && empty($programInterface)) {
+                error_log("Комментарии и программный интерфейс не найдены в файле: $relativePath", 3, $this->logFile);
+                continue;
+            }
+
+            foreach ($comments as $comment) {
+                // Если в комментарии указано имя модуля, используем его
+                if (!empty($comment['module'])) {
+                    $moduleName = $comment['module'];
+                }
+
+                // Выводим имя модуля в лог
+                error_log("Обрабатываем модуль: $moduleName", 3, $this->logFile);
+                echo("\nОбрабатываем модуль: $moduleName");
+                echo("\nсодержимое Comment");
+
+                // Отладочный вывод
+                var_dump($comment);
+
+                $markdown = $this->markdownGenerator->generateModuleDoc($moduleName, $comment);
+
+                // Сохраняем структуру папок
+                $outputPath = $this->outputDir . '/' . dirname($relativePath) . '/' . $moduleName . '.md';
+
+                // Создаём папку, если её нет
+                if (!is_dir(dirname($outputPath))) {
+                    mkdir(dirname($outputPath), 0777, true);
+                }
+
+                file_put_contents($outputPath, $markdown);
+            }
+
+            // Генерация документации для программного интерфейса
+            if (!empty($programInterface)) {
+                $interfaceMarkdown = $this->markdownGenerator->generateProgramInterfaceDoc($moduleName, $programInterface);
+                $interfacePath = $this->outputDir . '/' . dirname($relativePath) . '/' . $moduleName . '_interface.md';
+                file_put_contents($interfacePath, $interfaceMarkdown);
+            }
+        }
+    }
+}

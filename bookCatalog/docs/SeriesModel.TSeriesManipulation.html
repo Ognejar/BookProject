@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>SeriesModel: Class TSeriesManipulation</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="generator" content="PasDoc 0.16.0">
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="StyleSheet" type="text/css" href="pasdoc.css">
+</head>
+<body>
+<div class="container"><div class="navigation">
+<ul><li><a href="AllUnits.html">Units</a></li><li><a href="ClassHierarchy.html">Class Hierarchy</a></li><li><a href="AllClasses.html">Classes, Interfaces, Objects and Records</a></li><li><a href="AllTypes.html">Types</a></li><li><a href="AllVariables.html">Variables</a></li><li><a href="AllConstants.html">Constants</a></li><li><a href="AllFunctions.html">Functions and Procedures</a></li><li><a href="AllIdentifiers.html">Identifiers</a></li></ul></div><div class="content">
+<span id="TSeriesManipulation"></span><h1 class="cio">Class TSeriesManipulation</h1>
+<div class="sections">
+<div class="one_section"><a class="section" href="#PasDoc-Description">Description</a></div><div class="one_section"><a class="section" href="#PasDoc-Hierarchy">Hierarchy</a></div><div class="one_section">Fields</div><div class="one_section"><a class="section" href="#PasDoc-Methods">Methods</a></div><div class="one_section">Properties</div></div>
+<span id="PasDoc-Description"></span><h2 class="unit">Unit</h2>
+<p class="unitlink">
+<a href="SeriesModel.html">SeriesModel</a></p>
+<h2 class="declaration">Declaration</h2>
+<p class="declaration">
+<code>type TSeriesManipulation = class(TObject)</code></p>
+<h2 class="description">Description</h2>
+<span id="PasDoc-Hierarchy"></span><h2 class="hierarchy">Hierarchy</h2>
+<ul class="hierarchy"><li class="ancestor">TObject</li>
+<li class="thisitem">TSeriesManipulation</li></ul><h2 class="overview">Overview</h2>
+<span id="PasDoc-Methods"></span><h3 class="summary">Methods</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <strong><a href="SeriesModel.TSeriesManipulation.html#CreateSeries">CreateSeries</a></strong>(const AName, APublisher, ADescription: string): <a href="SeriesTypes.TBookSeries.html">TBookSeries</a>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <strong><a href="SeriesModel.TSeriesManipulation.html#UpdateSeries">UpdateSeries</a></strong>(const ASeries: <a href="SeriesTypes.TBookSeries.html">TBookSeries</a>): Boolean;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <strong><a href="SeriesModel.TSeriesManipulation.html#DeleteSeries">DeleteSeries</a></strong>(const ASeriesID: Integer): Boolean;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <strong><a href="SeriesModel.TSeriesManipulation.html#GetSeriesByID">GetSeriesByID</a></strong>(const ASeriesID: Integer): <a href="SeriesTypes.TBookSeries.html">TBookSeries</a>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <strong><a href="SeriesModel.TSeriesManipulation.html#FindSeriesByName">FindSeriesByName</a></strong>(const AName: string): TArray&lt;<a href="SeriesTypes.TBookSeries.html">TBookSeries</a>&gt;;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <strong><a href="SeriesModel.TSeriesManipulation.html#GetAllSeries">GetAllSeries</a></strong>: TArray&lt;<a href="SeriesTypes.TBookSeries.html">TBookSeries</a>&gt;;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <strong><a href="SeriesModel.TSeriesManipulation.html#AddBookToSeries">AddBookToSeries</a></strong>(const ABookID, ASeriesID, ABookNumber: Integer): <a href="SeriesTypes.TBookSeriesItem.html">TBookSeriesItem</a>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <strong><a href="SeriesModel.TSeriesManipulation.html#RemoveBookFromSeries">RemoveBookFromSeries</a></strong>(const ABookID, ASeriesID: Integer): Boolean;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <strong><a href="SeriesModel.TSeriesManipulation.html#GetBooksInSeries">GetBooksInSeries</a></strong>(const ASeriesID: Integer): TArray&lt;<a href="SeriesTypes.TBookSeriesItem.html">TBookSeriesItem</a>&gt;;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <strong><a href="SeriesModel.TSeriesManipulation.html#FilterBooksInSeries">FilterBooksInSeries</a></strong>(const ASeriesID, ABookNumber: Integer): TArray&lt;<a href="SeriesTypes.TBookSeriesItem.html">TBookSeriesItem</a>&gt;;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <strong><a href="SeriesModel.TSeriesManipulation.html#UpdateBookNumberInSeries">UpdateBookNumberInSeries</a></strong>(const ABookID, ASeriesID, ANewBookNumber: Integer): Boolean;</code></td>
+</tr>
+</table>
+<h2 class="description">Description</h2>
+<h3 class="detail">Methods</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="CreateSeries"></span><code>function <strong>CreateSeries</strong>(const AName, APublisher, ADescription: string): <a href="SeriesTypes.TBookSeries.html">TBookSeries</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+ Создает новую серию книг. </p>
+<p>
+ 
+
+<p>
+
+<p>
+
+<p></p>
+<h6 class="description_section">Parameters</h6>
+<dl class="parameters">
+<dt>AName</dt>
+<dd>Название серии.</dd>
+<dt>APublisher</dt>
+<dd>Издательство серии.</dd>
+<dt>ADescription</dt>
+<dd>Описание серии.</dd>
+</dl>
+<h6 class="description_section">Returns</h6>
+<p class="return">Созданный объект TBookSeries.</p></td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="UpdateSeries"></span><code>function <strong>UpdateSeries</strong>(const ASeries: <a href="SeriesTypes.TBookSeries.html">TBookSeries</a>): Boolean;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+ Обновляет данные существующей серии. </p>
+<p>
+ 
+
+<p></p>
+<h6 class="description_section">Parameters</h6>
+<dl class="parameters">
+<dt>ASeries</dt>
+<dd>Серия для обновления.</dd>
+</dl>
+<h6 class="description_section">Returns</h6>
+<p class="return">True, если обновление прошло успешно, иначе False.</p></td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="DeleteSeries"></span><code>function <strong>DeleteSeries</strong>(const ASeriesID: Integer): Boolean;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+ Удаляет серию по её идентификатору. </p>
+<p>
+ 
+
+<p></p>
+<h6 class="description_section">Parameters</h6>
+<dl class="parameters">
+<dt>ASeriesID</dt>
+<dd>Идентификатор серии.</dd>
+</dl>
+<h6 class="description_section">Returns</h6>
+<p class="return">True, если удаление прошло успешно, иначе False.</p></td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="GetSeriesByID"></span><code>function <strong>GetSeriesByID</strong>(const ASeriesID: Integer): <a href="SeriesTypes.TBookSeries.html">TBookSeries</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+ Получает серию по её идентификатору. </p>
+<p>
+ 
+
+<p></p>
+<h6 class="description_section">Parameters</h6>
+<dl class="parameters">
+<dt>ASeriesID</dt>
+<dd>Идентификатор серии.</dd>
+</dl>
+<h6 class="description_section">Returns</h6>
+<p class="return">Объект TBookSeries или nil, если серия не найдена.</p></td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="FindSeriesByName"></span><code>function <strong>FindSeriesByName</strong>(const AName: string): TArray&lt;<a href="SeriesTypes.TBookSeries.html">TBookSeries</a>&gt;;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+ Ищет серии по названию. </p>
+<p>
+ 
+
+<p></p>
+<h6 class="description_section">Parameters</h6>
+<dl class="parameters">
+<dt>AName</dt>
+<dd>Название серии для поиска.</dd>
+</dl>
+<h6 class="description_section">Returns</h6>
+<p class="return">Массив объектов TBookSeries.</p></td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="GetAllSeries"></span><code>function <strong>GetAllSeries</strong>: TArray&lt;<a href="SeriesTypes.TBookSeries.html">TBookSeries</a>&gt;;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+ Получает все серии. </p>
+<p>
+ </p>
+<h6 class="description_section">Returns</h6>
+<p class="return">Массив объектов TBookSeries.</p></td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="AddBookToSeries"></span><code>function <strong>AddBookToSeries</strong>(const ABookID, ASeriesID, ABookNumber: Integer): <a href="SeriesTypes.TBookSeriesItem.html">TBookSeriesItem</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+ Добавляет книгу в серию. </p>
+<p>
+ 
+
+<p>
+
+<p>
+
+<p></p>
+<h6 class="description_section">Parameters</h6>
+<dl class="parameters">
+<dt>ABookID</dt>
+<dd>Идентификатор книги.</dd>
+<dt>ASeriesID</dt>
+<dd>Идентификатор серии.</dd>
+<dt>ABookNumber</dt>
+<dd>Номер книги в серии.</dd>
+</dl>
+<h6 class="description_section">Returns</h6>
+<p class="return">Созданный объект TBookSeriesItem.</p></td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="RemoveBookFromSeries"></span><code>function <strong>RemoveBookFromSeries</strong>(const ABookID, ASeriesID: Integer): Boolean;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+ Удаляет книгу из серии. </p>
+<p>
+ 
+
+<p>
+
+<p></p>
+<h6 class="description_section">Parameters</h6>
+<dl class="parameters">
+<dt>ABookID</dt>
+<dd>Идентификатор книги.</dd>
+<dt>ASeriesID</dt>
+<dd>Идентификатор серии.</dd>
+</dl>
+<h6 class="description_section">Returns</h6>
+<p class="return">True, если удаление прошло успешно, иначе False.</p></td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="GetBooksInSeries"></span><code>function <strong>GetBooksInSeries</strong>(const ASeriesID: Integer): TArray&lt;<a href="SeriesTypes.TBookSeriesItem.html">TBookSeriesItem</a>&gt;;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+ Получает все книги в серии. </p>
+<p>
+ 
+
+<p></p>
+<h6 class="description_section">Parameters</h6>
+<dl class="parameters">
+<dt>ASeriesID</dt>
+<dd>Идентификатор серии.</dd>
+</dl>
+<h6 class="description_section">Returns</h6>
+<p class="return">Массив объектов TBookSeriesItem.</p></td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="FilterBooksInSeries"></span><code>function <strong>FilterBooksInSeries</strong>(const ASeriesID, ABookNumber: Integer): TArray&lt;<a href="SeriesTypes.TBookSeriesItem.html">TBookSeriesItem</a>&gt;;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+ Фильтрует книги в серии по номеру. </p>
+<p>
+ 
+
+<p>
+
+<p></p>
+<h6 class="description_section">Parameters</h6>
+<dl class="parameters">
+<dt>ASeriesID</dt>
+<dd>Идентификатор серии.</dd>
+<dt>ABookNumber</dt>
+<dd>Номер книги.</dd>
+</dl>
+<h6 class="description_section">Returns</h6>
+<p class="return">Массив объектов TBookSeriesItem.</p></td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="UpdateBookNumberInSeries"></span><code>function <strong>UpdateBookNumberInSeries</strong>(const ABookID, ASeriesID, ANewBookNumber: Integer): Boolean;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+ Обновляет номер книги в серии. </p>
+<p>
+ 
+
+<p>
+
+<p>
+
+<p></p>
+<h6 class="description_section">Parameters</h6>
+<dl class="parameters">
+<dt>ABookID</dt>
+<dd>Идентификатор книги.</dd>
+<dt>ASeriesID</dt>
+<dd>Идентификатор серии.</dd>
+<dt>ANewBookNumber</dt>
+<dd>Новый номер книги.</dd>
+</dl>
+<h6 class="description_section">Returns</h6>
+<p class="return">True, если обновление прошло успешно, иначе False.</p></td></tr>
+</table>
+<hr><span class="appinfo"><em>Generated by <a href="https://pasdoc.github.io/">PasDoc 0.16.0</a>. </em>
+</span>
+</div></div></body></html>

@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>PublisherModel: Class TPublisherManipulation</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="generator" content="PasDoc 0.16.0">
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="StyleSheet" type="text/css" href="pasdoc.css">
+</head>
+<body>
+<div class="container"><div class="navigation">
+<ul><li><a href="AllUnits.html">Units</a></li><li><a href="ClassHierarchy.html">Class Hierarchy</a></li><li><a href="AllClasses.html">Classes, Interfaces, Objects and Records</a></li><li><a href="AllTypes.html">Types</a></li><li><a href="AllVariables.html">Variables</a></li><li><a href="AllConstants.html">Constants</a></li><li><a href="AllFunctions.html">Functions and Procedures</a></li><li><a href="AllIdentifiers.html">Identifiers</a></li></ul></div><div class="content">
+<span id="TPublisherManipulation"></span><h1 class="cio">Class TPublisherManipulation</h1>
+<div class="sections">
+<div class="one_section"><a class="section" href="#PasDoc-Description">Description</a></div><div class="one_section"><a class="section" href="#PasDoc-Hierarchy">Hierarchy</a></div><div class="one_section">Fields</div><div class="one_section"><a class="section" href="#PasDoc-Methods">Methods</a></div><div class="one_section">Properties</div></div>
+<span id="PasDoc-Description"></span><h2 class="unit">Unit</h2>
+<p class="unitlink">
+<a href="PublisherModel.html">PublisherModel</a></p>
+<h2 class="declaration">Declaration</h2>
+<p class="declaration">
+<code>type TPublisherManipulation = class(TObject)</code></p>
+<h2 class="description">Description</h2>
+<span id="PasDoc-Hierarchy"></span><h2 class="hierarchy">Hierarchy</h2>
+<ul class="hierarchy"><li class="ancestor">TObject</li>
+<li class="thisitem">TPublisherManipulation</li></ul><h2 class="overview">Overview</h2>
+<span id="PasDoc-Methods"></span><h3 class="summary">Methods</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <strong><a href="PublisherModel.TPublisherManipulation.html#CreatePublisher">CreatePublisher</a></strong>(const AName, AAddress: string): <a href="PublisherTypes.TPublisher.html">TPublisher</a>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <strong><a href="PublisherModel.TPublisherManipulation.html#UpdatePublisher">UpdatePublisher</a></strong>(const APublisher: <a href="PublisherTypes.TPublisher.html">TPublisher</a>): Boolean;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <strong><a href="PublisherModel.TPublisherManipulation.html#DeletePublisher">DeletePublisher</a></strong>(const APublisherID: Integer): Boolean;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <strong><a href="PublisherModel.TPublisherManipulation.html#GetPublisherByID">GetPublisherByID</a></strong>(const APublisherID: Integer): <a href="PublisherTypes.TPublisher.html">TPublisher</a>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <strong><a href="PublisherModel.TPublisherManipulation.html#FindPublisherByName">FindPublisherByName</a></strong>(const AName: string): TArray&lt;<a href="PublisherTypes.TPublisher.html">TPublisher</a>&gt;;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <strong><a href="PublisherModel.TPublisherManipulation.html#GetAllPublishers">GetAllPublishers</a></strong>: TArray&lt;<a href="PublisherTypes.TPublisher.html">TPublisher</a>&gt;;</code></td>
+</tr>
+</table>
+<h2 class="description">Description</h2>
+<h3 class="detail">Methods</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="CreatePublisher"></span><code>function <strong>CreatePublisher</strong>(const AName, AAddress: string): <a href="PublisherTypes.TPublisher.html">TPublisher</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+ Создает нового издателя. </p>
+<p>
+ 
+
+<p>
+
+<p></p>
+<h6 class="description_section">Parameters</h6>
+<dl class="parameters">
+<dt>AName</dt>
+<dd>Название издателя.</dd>
+<dt>AAddress</dt>
+<dd>Адрес издателя.</dd>
+</dl>
+<h6 class="description_section">Returns</h6>
+<p class="return">Созданный объект TPublisher.</p></td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="UpdatePublisher"></span><code>function <strong>UpdatePublisher</strong>(const APublisher: <a href="PublisherTypes.TPublisher.html">TPublisher</a>): Boolean;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+ Обновляет данные существующего издателя. </p>
+<p>
+ 
+
+<p></p>
+<h6 class="description_section">Parameters</h6>
+<dl class="parameters">
+<dt>APublisher</dt>
+<dd>Издатель для обновления.</dd>
+</dl>
+<h6 class="description_section">Returns</h6>
+<p class="return">True, если обновление прошло успешно, иначе False.</p></td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="DeletePublisher"></span><code>function <strong>DeletePublisher</strong>(const APublisherID: Integer): Boolean;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+ Удаляет издателя по его идентификатору. </p>
+<p>
+ 
+
+<p></p>
+<h6 class="description_section">Parameters</h6>
+<dl class="parameters">
+<dt>APublisherID</dt>
+<dd>Идентификатор издателя.</dd>
+</dl>
+<h6 class="description_section">Returns</h6>
+<p class="return">True, если удаление прошло успешно, иначе False.</p></td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="GetPublisherByID"></span><code>function <strong>GetPublisherByID</strong>(const APublisherID: Integer): <a href="PublisherTypes.TPublisher.html">TPublisher</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+ Получает издателя по его идентификатору. </p>
+<p>
+ 
+
+<p></p>
+<h6 class="description_section">Parameters</h6>
+<dl class="parameters">
+<dt>APublisherID</dt>
+<dd>Идентификатор издателя.</dd>
+</dl>
+<h6 class="description_section">Returns</h6>
+<p class="return">Объект TPublisher или nil, если издатель не найден.</p></td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="FindPublisherByName"></span><code>function <strong>FindPublisherByName</strong>(const AName: string): TArray&lt;<a href="PublisherTypes.TPublisher.html">TPublisher</a>&gt;;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+ Ищет издателей по названию. </p>
+<p>
+ 
+
+<p></p>
+<h6 class="description_section">Parameters</h6>
+<dl class="parameters">
+<dt>AName</dt>
+<dd>Название издателя для поиска.</dd>
+</dl>
+<h6 class="description_section">Returns</h6>
+<p class="return">Массив объектов TPublisher.</p></td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="GetAllPublishers"></span><code>function <strong>GetAllPublishers</strong>: TArray&lt;<a href="PublisherTypes.TPublisher.html">TPublisher</a>&gt;;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+ Получает всех издателей. </p>
+<p>
+ </p>
+<h6 class="description_section">Returns</h6>
+<p class="return">Массив объектов TPublisher.</p></td></tr>
+</table>
+<hr><span class="appinfo"><em>Generated by <a href="https://pasdoc.github.io/">PasDoc 0.16.0</a>. </em>
+</span>
+</div></div></body></html>

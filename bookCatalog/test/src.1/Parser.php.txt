@@ -1,0 +1,199 @@
+<?php
+
+class Parser {
+    /**
+     * Извлекает комментарии и программный интерфейс из Pascal-файла.
+     *
+     * @param string $filePath Путь к файлу.
+     * @return array Массив комментариев и программного интерфейса.
+     */
+    public function parseFile($filePath) {
+        $comments = [];
+        $programInterface = [];
+
+        // Проверяем, существует ли файл
+        if (!file_exists($filePath)) {
+            error_log("Файл не найден: $filePath", 3, 'log/php_doc.log');
+            return ['comments' => $comments, 'programInterface' => $programInterface];
+        }
+
+        // Читаем содержимое файла
+        $content = file_get_contents($filePath);
+        if ($content === false) {
+            error_log("Не удалось прочитать файл: $filePath", 3, 'log/php_doc.log');
+            return ['comments' => $comments, 'programInterface' => $programInterface];
+        }
+
+        // Извлечение многострочных комментариев {** ... *}
+        preg_match_all('/\{\*+\s*(.*?)\*\}/s', $content, $multiLineMatches);
+        foreach ($multiLineMatches[1] as $comment) {
+            $processedComment = $this->parseComment($comment, 'multi');
+            if (!empty($processedComment)) {
+                $comments[] = $processedComment;
+            }
+        }
+
+        // Извлечение однострочных комментариев //< ...
+        preg_match_all('/\/\/<+\s*(.*)$/m', $content, $singleLineMatches);
+        $singleLineComments = [];
+        foreach ($singleLineMatches[1] as $comment) {
+            $singleLineComments[] = trim($comment);
+        }
+        if (!empty($singleLineComments)) {
+            $comments[] = ['description' => implode("\n", $singleLineComments)];
+        }
+
+        // Извлечение программного интерфейса
+        // Предположим, что программный интерфейс содержит только типы
+        preg_match_all('/type\s+([\s\S]*?)(?=\b(begin|const|var|threadvar|implementation|interface)\b)/i', $content, $typeMatches);
+        if (!empty($typeMatches[1])) {
+            foreach ($typeMatches[1] as $typeBlock) {
+                // Разбиваем на отдельные типы
+                $types = preg_split('/\r\n|\r|\n/', $typeBlock);
+                foreach ($types as $type) {
+                    $programInterface[] = trim($type);
+                }
+            }
+        }
+
+        return ['comments' => $comments, 'programInterface' => $programInterface];
+    }
+
+    /**
+     * Парсит отдельный комментарий и извлекает аннотации.
+     *
+     * @param string $comment Текст комментария.
+     * @param string $type Тип комментария ('multi', 'single_next', 'single_previous').
+     * @return array Структурированные данные.
+     */
+    private function parseComment($comment, $type) {
+        $result = [
+            'description' => '',
+            'module' => '',
+            'abstract' => '',
+            'author' => [],
+            'version' => [],
+            'params' => [],
+            'returns' => [],
+            'throws' => [],
+            'see' => [],
+            'deprecated' => [],
+            'since' => [],
+            'code' => [],
+            'link' => [],
+        ];
+
+        // Разделяем комментарий на строки
+        $lines = explode("\n", trim($comment));
+
+        // Извлечение описания (первая строка)
+        if (isset($lines[0])) {
+            $firstLine = trim($lines[0]);
+            // Удаляем '*' в начале строки, если он есть
+            if (strpos($firstLine, '*') === 0) {
+                $firstLine = ltrim($firstLine, '*');
+                // Отладочный вывод
+                var_dump("После удаления '*' из первой строки:", $firstLine);
+            }
+            // Удаляем '@' в начале строки, если он есть
+            if (strpos($firstLine, '@') === 0) {
+                $firstLine = ltrim($firstLine, '@');
+                // Отладочный вывод
+                var_dump("После удаления '@' из первой строки:", $firstLine);
+            }
+            $result['description'] = trim($firstLine);
+            // Отладочный вывод
+            var_dump("Извлеченное описание:", $result['description']);
+        }
+
+        // Обработка аннотаций
+        foreach ($lines as $lineNumber => $line) {
+            $line = trim($line);
+
+            // Отладочный вывод обрабатываемой строки
+            var_dump("Обрабатываемая строка ($lineNumber):", $line);
+
+            // Пропускаем пустые строки и строки, которые не начинаются с '@'
+            if (empty($line) || strpos($line, '@') !== 0) {
+                continue;
+            }
+
+            // Удаляем '*' в начале строки, если он есть
+            if (strpos($line, '* @') === 0) {
+                $line = ltrim($line, '* ');
+                // Отладочный вывод
+                var_dump("После удаления '* ' из строки:", $line);
+            }
+
+            // @module
+            if (preg_match('/@module\s+(\w+)/', $line, $matches)) {
+                $result['module'] = $matches[1];
+                continue;
+            }
+
+            // @abstract
+            if (preg_match('/@abstract\s*\((.*?)\)/', $line, $matches)) {
+                $result['abstract'] = trim($matches[1]);
+                continue;
+            }
+
+            // @author
+            if (preg_match('/@author\s+(.*)/', $line, $matches)) {
+                $result['author'][] = trim($matches[1]);
+            }
+
+            // @version
+            if (preg_match('/@version\s+(.*)/', $line, $matches)) {
+                $result['version'][] = trim($matches[1]);
+            }
+
+            // @param
+            if (preg_match('/@param\s+(\w+)\s+(.*)/', $line, $matches)) {
+                $result['params'][] = [
+                    'name' => $matches[1],
+                    'description' => trim($matches[2]),
+                ];
+            }
+
+            // @return
+            if (preg_match('/@return\s+(.*)/', $line, $matches)) {
+                $result['returns'][] = trim($matches[1]);
+            }
+
+            // @throws или @exception
+            if (preg_match('/@(throws|exception)\s+(\w+)\s+(.*)/', $line, $matches)) {
+                $result['throws'][] = [
+                    'exception' => $matches[2],
+                    'description' => trim($matches[3]),
+                ];
+            }
+
+            // @see
+            if (preg_match('/@see\s+(.*)/', $line, $matches)) {
+                $result['see'][] = trim($matches[1]);
+            }
+
+            // @deprecated
+            if (preg_match('/@deprecated\s+(.*)/', $line, $matches)) {
+                $result['deprecated'][] = trim($matches[1]);
+            }
+
+            // @since
+            if (preg_match('/@since\s+(.*)/', $line, $matches)) {
+                $result['since'][] = trim($matches[1]);
+            }
+
+            // @code
+            if (preg_match('/@code\s+(.*)/', $line, $matches)) {
+                $result['code'][] = trim($matches[1]);
+            }
+
+            // @link
+            if (preg_match('/@link\s+(.*)/', $line, $matches)) {
+                $result['link'][] = trim($matches[1]);
+            }
+        }
+
+        return $result;
+    }
+}

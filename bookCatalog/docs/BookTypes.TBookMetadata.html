@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>BookTypes: Class TBookMetadata</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="generator" content="PasDoc 0.16.0">
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="StyleSheet" type="text/css" href="pasdoc.css">
+</head>
+<body>
+<div class="container"><div class="navigation">
+<ul><li><a href="AllUnits.html">Units</a></li><li><a href="ClassHierarchy.html">Class Hierarchy</a></li><li><a href="AllClasses.html">Classes, Interfaces, Objects and Records</a></li><li><a href="AllTypes.html">Types</a></li><li><a href="AllVariables.html">Variables</a></li><li><a href="AllConstants.html">Constants</a></li><li><a href="AllFunctions.html">Functions and Procedures</a></li><li><a href="AllIdentifiers.html">Identifiers</a></li></ul></div><div class="content">
+<span id="TBookMetadata"></span><h1 class="cio">Class TBookMetadata</h1>
+<div class="sections">
+<div class="one_section"><a class="section" href="#PasDoc-Description">Description</a></div><div class="one_section"><a class="section" href="#PasDoc-Hierarchy">Hierarchy</a></div><div class="one_section">Fields</div><div class="one_section"><a class="section" href="#PasDoc-Methods">Methods</a></div><div class="one_section"><a class="section" href="#PasDoc-Properties">Properties</a></div></div>
+<span id="PasDoc-Description"></span><h2 class="unit">Unit</h2>
+<p class="unitlink">
+<a href="BookTypes.html">BookTypes</a></p>
+<h2 class="declaration">Declaration</h2>
+<p class="declaration">
+<code>type TBookMetadata = class(<a class="normal" href="BaseEntityStorage.TBaseEntity.html">TBaseEntity</a>)</code></p>
+<h2 class="description">Description</h2>
+<p>
+Класс для работы с метаданными книги
+
+<p>TBookMetadata предоставляет функциональность для хранения и управления метаданными о книге, включая такие аспекты, как название, автор, ISBN, обложка, серия и другие.</p>
+<span id="PasDoc-Hierarchy"></span><h2 class="hierarchy">Hierarchy</h2>
+<ul class="hierarchy"><li class="ancestor">TObject</li>
+<li class="ancestor"><a class="normal" href="BaseEntityStorage.TBaseEntity.html">TBaseEntity</a></li>
+<li class="thisitem">TBookMetadata</li></ul><h2 class="overview">Overview</h2>
+<span id="PasDoc-Methods"></span><h3 class="summary">Methods</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>constructor <strong><a href="BookTypes.TBookMetadata.html#Create">Create</a></strong>; override;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>destructor <strong><a href="BookTypes.TBookMetadata.html#Destroy">Destroy</a></strong>; override;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <strong><a href="BookTypes.TBookMetadata.html#HasCover">HasCover</a></strong>: Boolean;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <strong><a href="BookTypes.TBookMetadata.html#GetCoverPath">GetCoverPath</a></strong>: string;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <strong><a href="BookTypes.TBookMetadata.html#ToBrief">ToBrief</a></strong>: <a href="BriefTypes.TBookBrief.html">TBookBrief</a>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <strong><a href="BookTypes.TBookMetadata.html#GetSeriesCount">GetSeriesCount</a></strong>: Integer;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <strong><a href="BookTypes.TBookMetadata.html#GetSeriesItem">GetSeriesItem</a></strong>(Index: Integer): <a href="SeriesTypes.TBookSeriesItem.html">SeriesTypes.TBookSeriesItem</a>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <strong><a href="BookTypes.TBookMetadata.html#AddSeriesItem">AddSeriesItem</a></strong>(const AItem: <a href="SeriesTypes.TBookSeriesItem.html">SeriesTypes.TBookSeriesItem</a>);</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <strong><a href="BookTypes.TBookMetadata.html#RemoveSeriesItem">RemoveSeriesItem</a></strong>(const AIndex: Integer);</code></td>
+</tr>
+</table>
+<span id="PasDoc-Properties"></span><h3 class="summary">Properties</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>property <strong><a href="BookTypes.TBookMetadata.html#ID">ID</a></strong>: Integer read FID write FID;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>property <strong><a href="BookTypes.TBookMetadata.html#Title">Title</a></strong>: string read FTitle write FTitle;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>property <strong><a href="BookTypes.TBookMetadata.html#Author">Author</a></strong>: string read FAuthor write FAuthor;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>property <strong><a href="BookTypes.TBookMetadata.html#CategoryID">CategoryID</a></strong>: Integer read FCategoryID write FCategoryID;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>property <strong><a href="BookTypes.TBookMetadata.html#Description">Description</a></strong>: string read FDescription write FDescription;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>property <strong><a href="BookTypes.TBookMetadata.html#Year">Year</a></strong>: Integer read FYear write FYear;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>property <strong><a href="BookTypes.TBookMetadata.html#ISBN">ISBN</a></strong>: string read FISBN write FISBN;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>property <strong><a href="BookTypes.TBookMetadata.html#Publisher">Publisher</a></strong>: string read FPublisher write FPublisher;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>property <strong><a href="BookTypes.TBookMetadata.html#PageCount">PageCount</a></strong>: Integer read FPageCount write FPageCount;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>property <strong><a href="BookTypes.TBookMetadata.html#Language">Language</a></strong>: string read FLanguage write FLanguage;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>property <strong><a href="BookTypes.TBookMetadata.html#Format">Format</a></strong>: string read FFormat write FFormat;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>property <strong><a href="BookTypes.TBookMetadata.html#FileSize">FileSize</a></strong>: Int64 read FFileSize write FFileSize;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>property <strong><a href="BookTypes.TBookMetadata.html#FilePath">FilePath</a></strong>: string read FFilePath write FFilePath;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>property <strong><a href="BookTypes.TBookMetadata.html#CoverPath">CoverPath</a></strong>: string read <a href="BookTypes.TBookMetadata.html#GetCoverPath">GetCoverPath</a>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>property <strong><a href="BookTypes.TBookMetadata.html#Tags">Tags</a></strong>: TArray&lt;string&gt; read FTags write FTags;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>property <strong><a href="BookTypes.TBookMetadata.html#AddedDate">AddedDate</a></strong>: TDateTime read FAddedDate write FAddedDate;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>property <strong><a href="BookTypes.TBookMetadata.html#Notes">Notes</a></strong>: string read FNotes write FNotes;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>property <strong><a href="BookTypes.TBookMetadata.html#Rating">Rating</a></strong>: Integer read FRating write FRating;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>property <strong><a href="BookTypes.TBookMetadata.html#ReadStatus">ReadStatus</a></strong>: string read FReadStatus write FReadStatus;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>property <strong><a href="BookTypes.TBookMetadata.html#Keywords">Keywords</a></strong>: string read FKeywords write FKeywords;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>property <strong><a href="BookTypes.TBookMetadata.html#Series">Series</a></strong>: TArray&lt;<a href="SeriesTypes.TBookSeriesItem.html">SeriesTypes.TBookSeriesItem</a>&gt; read FSeries
+      write SetSeries;</code></td>
+</tr>
+</table>
+<h2 class="description">Description</h2>
+<h3 class="detail">Methods</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="Create"></span><code>constructor <strong>Create</strong>; override;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+** @brief Установка серии для книги. *</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="Destroy"></span><code>destructor <strong>Destroy</strong>; override;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="HasCover"></span><code>function <strong>HasCover</strong>: Boolean;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Проверяет, есть ли у книги обложка. </p>
+<h6 class="description_section">Returns</h6>
+<p class="return">True, если у книги есть обложка, иначе False.</p></td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="GetCoverPath"></span><code>function <strong>GetCoverPath</strong>: string;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Возвращает путь к обложке книги. </p>
+<h6 class="description_section">Returns</h6>
+<p class="return">Путь к обложке.</p></td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="ToBrief"></span><code>function <strong>ToBrief</strong>: <a href="BriefTypes.TBookBrief.html">TBookBrief</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+** * @brief Преобразует метаданные книги в краткий формат. * *  *</p>
+<h6 class="description_section">Returns</h6>
+<p class="return">Объект TBookBrief, содержащий краткие сведения о книге.</p></td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="GetSeriesCount"></span><code>function <strong>GetSeriesCount</strong>: Integer;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+** * @brief Возвращает количество элементов в серии. * *  *</p>
+<h6 class="description_section">Returns</h6>
+<p class="return">Количество элементов в серии.</p></td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="GetSeriesItem"></span><code>function <strong>GetSeriesItem</strong>(Index: Integer): <a href="SeriesTypes.TBookSeriesItem.html">SeriesTypes.TBookSeriesItem</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+** * @brief Возвращает элемент серии по индексу. * *  *  *</p>
+<h6 class="description_section">Parameters</h6>
+<dl class="parameters">
+<dt>Index</dt>
+<dd>Индекс элемента в серии.</dd>
+</dl>
+<h6 class="description_section">Returns</h6>
+<p class="return">Элемент серии.</p></td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="AddSeriesItem"></span><code>procedure <strong>AddSeriesItem</strong>(const AItem: <a href="SeriesTypes.TBookSeriesItem.html">SeriesTypes.TBookSeriesItem</a>);</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Добавляет элемент в серию.
+
+<p></p>
+<h6 class="description_section">Parameters</h6>
+<dl class="parameters">
+<dt>AItem</dt>
+<dd>Элемент серии для добавления.</dd>
+</dl>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="RemoveSeriesItem"></span><code>procedure <strong>RemoveSeriesItem</strong>(const AIndex: Integer);</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Удаляет элемент из серии по индексу. </p>
+<h6 class="description_section">Parameters</h6>
+<dl class="parameters">
+<dt>AIndex</dt>
+<dd>Индекс элемента в серии.</dd>
+</dl>
+</td></tr>
+</table>
+<h3 class="detail">Properties</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="ID"></span><code>property <strong>ID</strong>: Integer read FID write FID;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Уникальный идентификатор книги.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="Title"></span><code>property <strong>Title</strong>: string read FTitle write FTitle;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Название книги</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="Author"></span><code>property <strong>Author</strong>: string read FAuthor write FAuthor;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Автор книги.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="CategoryID"></span><code>property <strong>CategoryID</strong>: Integer read FCategoryID write FCategoryID;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="Description"></span><code>property <strong>Description</strong>: string read FDescription write FDescription;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+&lt; Идентификатор категории книги. *</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="Year"></span><code>property <strong>Year</strong>: Integer read FYear write FYear;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+&lt;Описание книги. *</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="ISBN"></span><code>property <strong>ISBN</strong>: string read FISBN write FISBN;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+&lt;Год издания книги.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="Publisher"></span><code>property <strong>Publisher</strong>: string read FPublisher write FPublisher;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+** @brief ISBN книги. *</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="PageCount"></span><code>property <strong>PageCount</strong>: Integer read FPageCount write FPageCount;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+** @brief Издательство книги. *</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="Language"></span><code>property <strong>Language</strong>: string read FLanguage write FLanguage;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+** @brief Количество страниц в книге. *</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="Format"></span><code>property <strong>Format</strong>: string read FFormat write FFormat;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+** @brief Язык книги. *</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="FileSize"></span><code>property <strong>FileSize</strong>: Int64 read FFileSize write FFileSize;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+** @brief Формат книги. *</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="FilePath"></span><code>property <strong>FilePath</strong>: string read FFilePath write FFilePath;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+** @brief Размер файла книги в байтах. *</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="CoverPath"></span><code>property <strong>CoverPath</strong>: string read <a href="BookTypes.TBookMetadata.html#GetCoverPath">GetCoverPath</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+** @brief Путь к файлу книги. *</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="Tags"></span><code>property <strong>Tags</strong>: TArray&lt;string&gt; read FTags write FTags;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+** @brief Путь к обложке книги. *</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="AddedDate"></span><code>property <strong>AddedDate</strong>: TDateTime read FAddedDate write FAddedDate;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+** @brief Теги, связанные с книгой. *</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="Notes"></span><code>property <strong>Notes</strong>: string read FNotes write FNotes;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+** @brief Дата добавления книги. *</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="Rating"></span><code>property <strong>Rating</strong>: Integer read FRating write FRating;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+** @brief Примечания к книге. *</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="ReadStatus"></span><code>property <strong>ReadStatus</strong>: string read FReadStatus write FReadStatus;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+** @brief Рейтинг книги. *</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="Keywords"></span><code>property <strong>Keywords</strong>: string read FKeywords write FKeywords;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+** @brief Статус чтения книги. *</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="Series"></span><code>property <strong>Series</strong>: TArray&lt;<a href="SeriesTypes.TBookSeriesItem.html">SeriesTypes.TBookSeriesItem</a>&gt; read FSeries
+      write SetSeries;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+** @brief Ключевые слова для поиска книги. *</p>
+</td></tr>
+</table>
+<hr><span class="appinfo"><em>Generated by <a href="https://pasdoc.github.io/">PasDoc 0.16.0</a>. </em>
+</span>
+</div></div></body></html>

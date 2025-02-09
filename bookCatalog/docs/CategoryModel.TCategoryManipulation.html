@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>CategoryModel: Class TCategoryManipulation</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="generator" content="PasDoc 0.16.0">
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="StyleSheet" type="text/css" href="pasdoc.css">
+</head>
+<body>
+<div class="container"><div class="navigation">
+<ul><li><a href="AllUnits.html">Units</a></li><li><a href="ClassHierarchy.html">Class Hierarchy</a></li><li><a href="AllClasses.html">Classes, Interfaces, Objects and Records</a></li><li><a href="AllTypes.html">Types</a></li><li><a href="AllVariables.html">Variables</a></li><li><a href="AllConstants.html">Constants</a></li><li><a href="AllFunctions.html">Functions and Procedures</a></li><li><a href="AllIdentifiers.html">Identifiers</a></li></ul></div><div class="content">
+<span id="TCategoryManipulation"></span><h1 class="cio">Class TCategoryManipulation</h1>
+<div class="sections">
+<div class="one_section"><a class="section" href="#PasDoc-Description">Description</a></div><div class="one_section"><a class="section" href="#PasDoc-Hierarchy">Hierarchy</a></div><div class="one_section">Fields</div><div class="one_section"><a class="section" href="#PasDoc-Methods">Methods</a></div><div class="one_section">Properties</div></div>
+<span id="PasDoc-Description"></span><h2 class="unit">Unit</h2>
+<p class="unitlink">
+<a href="CategoryModel.html">CategoryModel</a></p>
+<h2 class="declaration">Declaration</h2>
+<p class="declaration">
+<code>type TCategoryManipulation = class(TObject)</code></p>
+<h2 class="description">Description</h2>
+<span id="PasDoc-Hierarchy"></span><h2 class="hierarchy">Hierarchy</h2>
+<ul class="hierarchy"><li class="ancestor">TObject</li>
+<li class="thisitem">TCategoryManipulation</li></ul><h2 class="overview">Overview</h2>
+<span id="PasDoc-Methods"></span><h3 class="summary">Methods</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <strong><a href="CategoryModel.TCategoryManipulation.html#CreateCategory">CreateCategory</a></strong>(const AName: string; const AParentID: Integer): <a href="CategoryTypes.TCategory.html">TCategory</a>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <strong><a href="CategoryModel.TCategoryManipulation.html#UpdateCategory">UpdateCategory</a></strong>(const ACategory: <a href="CategoryTypes.TCategory.html">TCategory</a>): Boolean;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <strong><a href="CategoryModel.TCategoryManipulation.html#DeleteCategory">DeleteCategory</a></strong>(const ACategoryID: Integer): Boolean;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <strong><a href="CategoryModel.TCategoryManipulation.html#GetCategoryByID">GetCategoryByID</a></strong>(const ACategoryID: Integer): <a href="CategoryTypes.TCategory.html">TCategory</a>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <strong><a href="CategoryModel.TCategoryManipulation.html#FindCategoryByName">FindCategoryByName</a></strong>(const AName: string): TArray&lt;<a href="CategoryTypes.TCategory.html">TCategory</a>&gt;;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <strong><a href="CategoryModel.TCategoryManipulation.html#GetAllCategories">GetAllCategories</a></strong>: TArray&lt;<a href="CategoryTypes.TCategory.html">TCategory</a>&gt;;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <strong><a href="CategoryModel.TCategoryManipulation.html#AddChildCategory">AddChildCategory</a></strong>(const AParentID, AChildID: Integer): Boolean;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <strong><a href="CategoryModel.TCategoryManipulation.html#RemoveChildCategory">RemoveChildCategory</a></strong>(const AParentID, AChildID: Integer): Boolean;</code></td>
+</tr>
+</table>
+<h2 class="description">Description</h2>
+<h3 class="detail">Methods</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="CreateCategory"></span><code>function <strong>CreateCategory</strong>(const AName: string; const AParentID: Integer): <a href="CategoryTypes.TCategory.html">TCategory</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+ Создает новую категорию. </p>
+<p>
+ 
+
+<p>
+
+<p></p>
+<h6 class="description_section">Parameters</h6>
+<dl class="parameters">
+<dt>AName</dt>
+<dd>Название категории.</dd>
+<dt>AParentID</dt>
+<dd>Идентификатор родительской категории (0, если нет родителя).</dd>
+</dl>
+<h6 class="description_section">Returns</h6>
+<p class="return">Созданный объект TCategory.</p></td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="UpdateCategory"></span><code>function <strong>UpdateCategory</strong>(const ACategory: <a href="CategoryTypes.TCategory.html">TCategory</a>): Boolean;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+ Обновляет данные существующей категории. </p>
+<p>
+ 
+
+<p></p>
+<h6 class="description_section">Parameters</h6>
+<dl class="parameters">
+<dt>ACategory</dt>
+<dd>Категория для обновления.</dd>
+</dl>
+<h6 class="description_section">Returns</h6>
+<p class="return">True, если обновление прошло успешно, иначе False.</p></td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="DeleteCategory"></span><code>function <strong>DeleteCategory</strong>(const ACategoryID: Integer): Boolean;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+ Удаляет категорию по её идентификатору. </p>
+<p>
+ 
+
+<p></p>
+<h6 class="description_section">Parameters</h6>
+<dl class="parameters">
+<dt>ACategoryID</dt>
+<dd>Идентификатор категории.</dd>
+</dl>
+<h6 class="description_section">Returns</h6>
+<p class="return">True, если удаление прошло успешно, иначе False.</p></td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="GetCategoryByID"></span><code>function <strong>GetCategoryByID</strong>(const ACategoryID: Integer): <a href="CategoryTypes.TCategory.html">TCategory</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+ Получает категорию по её идентификатору. </p>
+<p>
+ 
+
+<p></p>
+<h6 class="description_section">Parameters</h6>
+<dl class="parameters">
+<dt>ACategoryID</dt>
+<dd>Идентификатор категории.</dd>
+</dl>
+<h6 class="description_section">Returns</h6>
+<p class="return">Объект TCategory или nil, если категория не найдена.</p></td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="FindCategoryByName"></span><code>function <strong>FindCategoryByName</strong>(const AName: string): TArray&lt;<a href="CategoryTypes.TCategory.html">TCategory</a>&gt;;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+ Ищет категории по названию. </p>
+<p>
+ 
+
+<p></p>
+<h6 class="description_section">Parameters</h6>
+<dl class="parameters">
+<dt>AName</dt>
+<dd>Название категории для поиска.</dd>
+</dl>
+<h6 class="description_section">Returns</h6>
+<p class="return">Массив объектов TCategory.</p></td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="GetAllCategories"></span><code>function <strong>GetAllCategories</strong>: TArray&lt;<a href="CategoryTypes.TCategory.html">TCategory</a>&gt;;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+ Получает все категории. </p>
+<p>
+ </p>
+<h6 class="description_section">Returns</h6>
+<p class="return">Массив объектов TCategory.</p></td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="AddChildCategory"></span><code>function <strong>AddChildCategory</strong>(const AParentID, AChildID: Integer): Boolean;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+ Добавляет дочернюю категорию. </p>
+<p>
+ 
+
+<p>
+
+<p></p>
+<h6 class="description_section">Parameters</h6>
+<dl class="parameters">
+<dt>AParentID</dt>
+<dd>Идентификатор родительской категории.</dd>
+<dt>AChildID</dt>
+<dd>Идентификатор дочерней категории.</dd>
+</dl>
+<h6 class="description_section">Returns</h6>
+<p class="return">True, если добавление прошло успешно, иначе False.</p></td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="RemoveChildCategory"></span><code>function <strong>RemoveChildCategory</strong>(const AParentID, AChildID: Integer): Boolean;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+ Удаляет дочернюю категорию. </p>
+<p>
+ 
+
+<p>
+
+<p></p>
+<h6 class="description_section">Parameters</h6>
+<dl class="parameters">
+<dt>AParentID</dt>
+<dd>Идентификатор родительской категории.</dd>
+<dt>AChildID</dt>
+<dd>Идентификатор дочерней категории.</dd>
+</dl>
+<h6 class="description_section">Returns</h6>
+<p class="return">True, если удаление прошло успешно, иначе False.</p></td></tr>
+</table>
+<hr><span class="appinfo"><em>Generated by <a href="https://pasdoc.github.io/">PasDoc 0.16.0</a>. </em>
+</span>
+</div></div></body></html>

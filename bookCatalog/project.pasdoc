@@ -1,0 +1,6 @@
+source=c:\_work11\bookCatalog\app\
+output=.\docs\
+format=html
+recursive=true
+excludedir=.*,__*
+

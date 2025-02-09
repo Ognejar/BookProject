@@ -1,0 +1,83 @@
+<?php
+
+class MarkdownGenerator {
+    /**
+     * Генерирует Markdown для модуля.
+     *
+     * @param string $moduleName Название модуля.
+     * @param array $comment Данные комментария.
+     * @return string Markdown-текст.
+     */
+    public function generateModuleDoc($moduleName, $comment) {
+        $templatePath = __DIR__ . '/../templates/module.md.template';
+        if (!file_exists($templatePath)) {
+            error_log("Шаблон Markdown не найден: $templatePath", 3, 'log/php_doc.log');
+            return "";
+        }
+
+        $template = file_get_contents($templatePath);
+
+        // Обработка аннотаций
+        $author = !empty($comment['author']) ? "**Автор:** " . implode(", ", $comment['author']) . "\n" : "";
+        $version = !empty($comment['version']) ? "**Версия:** " . implode(", ", $comment['version']) . "\n" : "";
+        $params = !empty($comment['params']) ? "**Параметры:**\n" . implode("\n", array_map(function ($param) {
+                return "- `{$param['name']}`: {$param['description']}";
+            }, $comment['params'])) . "\n" : "";
+        $returns = !empty($comment['returns']) ? "**Возвращает:** " . implode(", ", $comment['returns']) . "\n" : "";
+        $throws = !empty($comment['throws']) ? "**Исключения:**\n" . implode("\n", array_map(function ($throw) {
+                return "- `{$throw['exception']}`: {$throw['description']}";
+            }, $comment['throws'])) . "\n" : "";
+        $see = !empty($comment['see']) ? "**Смотрите также:**\n" . implode("\n", array_map(function ($seeItem) {
+                return "- [$seeItem](#$seeItem)";
+            }, $comment['see'])) . "\n" : "";
+        $deprecated = !empty($comment['deprecated']) ? "**Устарело:** " . implode(", ", $comment['deprecated']) . "\n" : "";
+        $since = !empty($comment['since']) ? "**Добавлено в версии:** " . implode(", ", $comment['since']) . "\n" : "";
+        $code = !empty($comment['code']) ? "**Пример кода:**\n```pascal\n" . implode("\n", $comment['code']) . "\n```\n" : "";
+        $linksMarkdown = !empty($comment['link']) ? "**Ссылки:**\n" . implode("\n", array_map(function ($linkItem) {
+                return "- [$linkItem]($linkItem)";
+            }, $comment['link'])) . "\n" : "";
+
+        $replacements = [
+            '{{name}}' => $moduleName,
+            '{{description}}' => $comment['description'],
+            '{{author}}' => $author,
+            '{{version}}' => $version,
+            '{{params}}' => $params,
+            '{{returns}}' => $returns,
+            '{{throws}}' => $throws,
+            '{{see}}' => $see,
+            '{{deprecated}}' => $deprecated,
+            '{{since}}' => $since,
+            '{{code}}' => $code,
+            '{{link}}' => $linksMarkdown,
+        ];
+
+        return str_replace(array_keys($replacements), array_values($replacements), $template);
+    }
+
+    /**
+     * Генерирует Markdown для программного интерфейса.
+     *
+     * @param string $moduleName Название модуля.
+     * @param array $programInterface Программный интерфейс.
+     * @return string Markdown-текст.
+     */
+    public function generateProgramInterfaceDoc($moduleName, $programInterface) {
+        $templatePath = __DIR__ . '/../templates/program_interface.md.template';
+        if (!file_exists($templatePath)) {
+            error_log("Шаблон программного интерфейса не найден: $templatePath", 3, 'log/php_doc.log');
+            return "";
+        }
+
+        $template = file_get_contents($templatePath);
+
+        $interfaceContent = implode("\n", $programInterface);
+
+        $replacements = [
+            '{{name}}' => $moduleName,
+            '{{programInterface}}' => $interfaceContent,
+        ];
+
+        return str_replace(array_keys($replacements), array_values($replacements), $template);
+    }
+}

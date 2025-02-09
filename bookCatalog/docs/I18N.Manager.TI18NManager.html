@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>I18N.Manager: Class TI18NManager</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="generator" content="PasDoc 0.16.0">
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="StyleSheet" type="text/css" href="pasdoc.css">
+</head>
+<body>
+<div class="container"><div class="navigation">
+<ul><li><a href="AllUnits.html">Units</a></li><li><a href="ClassHierarchy.html">Class Hierarchy</a></li><li><a href="AllClasses.html">Classes, Interfaces, Objects and Records</a></li><li><a href="AllTypes.html">Types</a></li><li><a href="AllVariables.html">Variables</a></li><li><a href="AllConstants.html">Constants</a></li><li><a href="AllFunctions.html">Functions and Procedures</a></li><li><a href="AllIdentifiers.html">Identifiers</a></li></ul></div><div class="content">
+<span id="TI18NManager"></span><h1 class="cio">Class TI18NManager</h1>
+<div class="sections">
+<div class="one_section"><a class="section" href="#PasDoc-Description">Description</a></div><div class="one_section"><a class="section" href="#PasDoc-Hierarchy">Hierarchy</a></div><div class="one_section">Fields</div><div class="one_section"><a class="section" href="#PasDoc-Methods">Methods</a></div><div class="one_section"><a class="section" href="#PasDoc-Properties">Properties</a></div></div>
+<span id="PasDoc-Description"></span><h2 class="unit">Unit</h2>
+<p class="unitlink">
+<a href="I18N.Manager.html">I18N.Manager</a></p>
+<h2 class="declaration">Declaration</h2>
+<p class="declaration">
+<code>type TI18NManager = class(TObject)</code></p>
+<h2 class="description">Description</h2>
+<p>
+Менеджер локализации</p>
+<span id="PasDoc-Hierarchy"></span><h2 class="hierarchy">Hierarchy</h2>
+<ul class="hierarchy"><li class="ancestor">TObject</li>
+<li class="thisitem">TI18NManager</li></ul><h2 class="overview">Overview</h2>
+<span id="PasDoc-Methods"></span><h3 class="summary">Methods</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>destructor <strong><a href="I18N.Manager.TI18NManager.html#Destroy">Destroy</a></strong>; override;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <strong><a href="I18N.Manager.TI18NManager.html#Translate">Translate</a></strong>(const Key: string): string; overload;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <strong><a href="I18N.Manager.TI18NManager.html#Translate">Translate</a></strong>(const Key: string; const Args: array of const): string; overload;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <strong><a href="I18N.Manager.TI18NManager.html#SetLanguage">SetLanguage</a></strong>(const LanguageCode: <a href="I18N.Types.html#TLanguageCode">TLanguageCode</a>);</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <strong><a href="I18N.Manager.TI18NManager.html#SetDefaultLanguage">SetDefaultLanguage</a></strong>(const LanguageCode: <a href="I18N.Types.html#TLanguageCode">TLanguageCode</a>);</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <strong><a href="I18N.Manager.TI18NManager.html#LoadLanguage">LoadLanguage</a></strong>(const LanguageCode: string);</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>class function <strong><a href="I18N.Manager.TI18NManager.html#Instance">Instance</a></strong>: <a href="I18N.Manager.TI18NManager.html">TI18NManager</a>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>class destructor <strong><a href="I18N.Manager.TI18NManager.html#Destroy">Destroy</a></strong>;</code></td>
+</tr>
+</table>
+<span id="PasDoc-Properties"></span><h3 class="summary">Properties</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>property <strong><a href="I18N.Manager.TI18NManager.html#Provider">Provider</a></strong>: <a href="I18N.Provider.JSON.TJSONTranslationProvider.html">TJSONTranslationProvider</a> read FProvider write FProvider;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>property <strong><a href="I18N.Manager.TI18NManager.html#DefaultLanguage">DefaultLanguage</a></strong>: <a href="I18N.Types.html#TLanguageCode">TLanguageCode</a> read FDefaultLanguage write FDefaultLanguage;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>property <strong><a href="I18N.Manager.TI18NManager.html#CurrentLanguage">CurrentLanguage</a></strong>: <a href="I18N.Types.html#TLanguageCode">TLanguageCode</a> read FCurrentLanguage write FCurrentLanguage;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>property <strong><a href="I18N.Manager.TI18NManager.html#TranslationsPath">TranslationsPath</a></strong>: string read FTranslationsPath write FTranslationsPath;</code></td>
+</tr>
+</table>
+<h2 class="description">Description</h2>
+<h3 class="detail">Methods</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="Destroy"></span><code>destructor <strong>Destroy</strong>; override;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Приватный конструктор (синглтон)</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="Translate"></span><code>function <strong>Translate</strong>(const Key: string): string; overload;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Методы для перевода строк</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="Translate"></span><code>function <strong>Translate</strong>(const Key: string; const Args: array of const): string; overload;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Перевод строки</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="SetLanguage"></span><code>procedure <strong>SetLanguage</strong>(const LanguageCode: <a href="I18N.Types.html#TLanguageCode">TLanguageCode</a>);</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Перевод строки с аргументами Управление языком</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="SetDefaultLanguage"></span><code>procedure <strong>SetDefaultLanguage</strong>(const LanguageCode: <a href="I18N.Types.html#TLanguageCode">TLanguageCode</a>);</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Установка текущего языка</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="LoadLanguage"></span><code>procedure <strong>LoadLanguage</strong>(const LanguageCode: string);</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Установка языка по умолчанию</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="Instance"></span><code>class function <strong>Instance</strong>: <a href="I18N.Manager.TI18NManager.html">TI18NManager</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Синглтон</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="Destroy"></span><code>class destructor <strong>Destroy</strong>;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Получение экземпляра менеджера</p>
+</td></tr>
+</table>
+<h3 class="detail">Properties</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="Provider"></span><code>property <strong>Provider</strong>: <a href="I18N.Provider.JSON.TJSONTranslationProvider.html">TJSONTranslationProvider</a> read FProvider write FProvider;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Деструктор синглтона Свойства</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="DefaultLanguage"></span><code>property <strong>DefaultLanguage</strong>: <a href="I18N.Types.html#TLanguageCode">TLanguageCode</a> read FDefaultLanguage write FDefaultLanguage;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Провайдер переводов</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="CurrentLanguage"></span><code>property <strong>CurrentLanguage</strong>: <a href="I18N.Types.html#TLanguageCode">TLanguageCode</a> read FCurrentLanguage write FCurrentLanguage;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Язык по умолчанию</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="TranslationsPath"></span><code>property <strong>TranslationsPath</strong>: string read FTranslationsPath write FTranslationsPath;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Текущий язык</p>
+</td></tr>
+</table>
+<hr><span class="appinfo"><em>Generated by <a href="https://pasdoc.github.io/">PasDoc 0.16.0</a>. </em>
+</span>
+</div></div></body></html>

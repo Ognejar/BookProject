@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>AuthorModel: Class TAuthorManipulation</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="generator" content="PasDoc 0.16.0">
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="StyleSheet" type="text/css" href="pasdoc.css">
+</head>
+<body>
+<div class="container"><div class="navigation">
+<ul><li><a href="AllUnits.html">Units</a></li><li><a href="ClassHierarchy.html">Class Hierarchy</a></li><li><a href="AllClasses.html">Classes, Interfaces, Objects and Records</a></li><li><a href="AllTypes.html">Types</a></li><li><a href="AllVariables.html">Variables</a></li><li><a href="AllConstants.html">Constants</a></li><li><a href="AllFunctions.html">Functions and Procedures</a></li><li><a href="AllIdentifiers.html">Identifiers</a></li></ul></div><div class="content">
+<span id="TAuthorManipulation"></span><h1 class="cio">Class TAuthorManipulation</h1>
+<div class="sections">
+<div class="one_section"><a class="section" href="#PasDoc-Description">Description</a></div><div class="one_section"><a class="section" href="#PasDoc-Hierarchy">Hierarchy</a></div><div class="one_section">Fields</div><div class="one_section"><a class="section" href="#PasDoc-Methods">Methods</a></div><div class="one_section">Properties</div></div>
+<span id="PasDoc-Description"></span><h2 class="unit">Unit</h2>
+<p class="unitlink">
+<a href="AuthorModel.html">AuthorModel</a></p>
+<h2 class="declaration">Declaration</h2>
+<p class="declaration">
+<code>type TAuthorManipulation = class(TObject)</code></p>
+<h2 class="description">Description</h2>
+<span id="PasDoc-Hierarchy"></span><h2 class="hierarchy">Hierarchy</h2>
+<ul class="hierarchy"><li class="ancestor">TObject</li>
+<li class="thisitem">TAuthorManipulation</li></ul><h2 class="overview">Overview</h2>
+<span id="PasDoc-Methods"></span><h3 class="summary">Methods</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <strong><a href="AuthorModel.TAuthorManipulation.html#CreateAuthor">CreateAuthor</a></strong>(const AName, ABio: string): <a href="AuthorTypes.TAuthor.html">TAuthor</a>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <strong><a href="AuthorModel.TAuthorManipulation.html#UpdateAuthor">UpdateAuthor</a></strong>(const AAuthor: <a href="AuthorTypes.TAuthor.html">TAuthor</a>): Boolean;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <strong><a href="AuthorModel.TAuthorManipulation.html#DeleteAuthor">DeleteAuthor</a></strong>(const AAuthorID: Integer): Boolean;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <strong><a href="AuthorModel.TAuthorManipulation.html#GetAuthorByID">GetAuthorByID</a></strong>(const AAuthorID: Integer): <a href="AuthorTypes.TAuthor.html">TAuthor</a>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <strong><a href="AuthorModel.TAuthorManipulation.html#FindAuthorByName">FindAuthorByName</a></strong>(const AName: string): TArray&lt;<a href="AuthorTypes.TAuthor.html">TAuthor</a>&gt;;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <strong><a href="AuthorModel.TAuthorManipulation.html#GetAllAuthors">GetAllAuthors</a></strong>: TArray&lt;<a href="AuthorTypes.TAuthor.html">TAuthor</a>&gt;;</code></td>
+</tr>
+</table>
+<h2 class="description">Description</h2>
+<h3 class="detail">Methods</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="CreateAuthor"></span><code>function <strong>CreateAuthor</strong>(const AName, ABio: string): <a href="AuthorTypes.TAuthor.html">TAuthor</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+ Создает нового автора. </p>
+<p>
+ 
+
+<p>
+
+<p></p>
+<h6 class="description_section">Parameters</h6>
+<dl class="parameters">
+<dt>AName</dt>
+<dd>Имя автора.</dd>
+<dt>ABio</dt>
+<dd>Биография автора.</dd>
+</dl>
+<h6 class="description_section">Returns</h6>
+<p class="return">Созданный объект TAuthor.</p></td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="UpdateAuthor"></span><code>function <strong>UpdateAuthor</strong>(const AAuthor: <a href="AuthorTypes.TAuthor.html">TAuthor</a>): Boolean;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+ Обновляет данные существующего автора. </p>
+<p>
+ 
+
+<p></p>
+<h6 class="description_section">Parameters</h6>
+<dl class="parameters">
+<dt>AAuthor</dt>
+<dd>Автор для обновления.</dd>
+</dl>
+<h6 class="description_section">Returns</h6>
+<p class="return">True, если обновление прошло успешно, иначе False.</p></td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="DeleteAuthor"></span><code>function <strong>DeleteAuthor</strong>(const AAuthorID: Integer): Boolean;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+ Удаляет автора по его идентификатору. </p>
+<p>
+ 
+
+<p></p>
+<h6 class="description_section">Parameters</h6>
+<dl class="parameters">
+<dt>AAuthorID</dt>
+<dd>Идентификатор автора.</dd>
+</dl>
+<h6 class="description_section">Returns</h6>
+<p class="return">True, если удаление прошло успешно, иначе False.</p></td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="GetAuthorByID"></span><code>function <strong>GetAuthorByID</strong>(const AAuthorID: Integer): <a href="AuthorTypes.TAuthor.html">TAuthor</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+ Получает автора по его идентификатору. </p>
+<p>
+ 
+
+<p></p>
+<h6 class="description_section">Parameters</h6>
+<dl class="parameters">
+<dt>AAuthorID</dt>
+<dd>Идентификатор автора.</dd>
+</dl>
+<h6 class="description_section">Returns</h6>
+<p class="return">Объект TAuthor или nil, если автор не найден.</p></td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="FindAuthorByName"></span><code>function <strong>FindAuthorByName</strong>(const AName: string): TArray&lt;<a href="AuthorTypes.TAuthor.html">TAuthor</a>&gt;;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+ Ищет авторов по имени. </p>
+<p>
+ 
+
+<p></p>
+<h6 class="description_section">Parameters</h6>
+<dl class="parameters">
+<dt>AName</dt>
+<dd>Имя автора для поиска.</dd>
+</dl>
+<h6 class="description_section">Returns</h6>
+<p class="return">Массив объектов TAuthor.</p></td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="GetAllAuthors"></span><code>function <strong>GetAllAuthors</strong>: TArray&lt;<a href="AuthorTypes.TAuthor.html">TAuthor</a>&gt;;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+ Получает всех авторов. </p>
+<p>
+ </p>
+<h6 class="description_section">Returns</h6>
+<p class="return">Массив объектов TAuthor.</p></td></tr>
+</table>
+<hr><span class="appinfo"><em>Generated by <a href="https://pasdoc.github.io/">PasDoc 0.16.0</a>. </em>
+</span>
+</div></div></body></html>

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>ArrayUtils: Class TArrayUtils</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="generator" content="PasDoc 0.16.0">
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="StyleSheet" type="text/css" href="pasdoc.css">
+</head>
+<body>
+<div class="container"><div class="navigation">
+<ul><li><a href="AllUnits.html">Units</a></li><li><a href="ClassHierarchy.html">Class Hierarchy</a></li><li><a href="AllClasses.html">Classes, Interfaces, Objects and Records</a></li><li><a href="AllTypes.html">Types</a></li><li><a href="AllVariables.html">Variables</a></li><li><a href="AllConstants.html">Constants</a></li><li><a href="AllFunctions.html">Functions and Procedures</a></li><li><a href="AllIdentifiers.html">Identifiers</a></li></ul></div><div class="content">
+<span id="TArrayUtils"></span><h1 class="cio">Class TArrayUtils</h1>
+<div class="sections">
+<div class="one_section"><a class="section" href="#PasDoc-Description">Description</a></div><div class="one_section"><a class="section" href="#PasDoc-Hierarchy">Hierarchy</a></div><div class="one_section">Fields</div><div class="one_section"><a class="section" href="#PasDoc-Methods">Methods</a></div><div class="one_section">Properties</div></div>
+<span id="PasDoc-Description"></span><h2 class="unit">Unit</h2>
+<p class="unitlink">
+<a href="ArrayUtils.html">ArrayUtils</a></p>
+<h2 class="declaration">Declaration</h2>
+<p class="declaration">
+<code>type TArrayUtils = class(TObject)</code></p>
+<h2 class="description">Description</h2>
+<span id="PasDoc-Hierarchy"></span><h2 class="hierarchy">Hierarchy</h2>
+<ul class="hierarchy"><li class="ancestor">TObject</li>
+<li class="thisitem">TArrayUtils</li></ul><h2 class="overview">Overview</h2>
+<span id="PasDoc-Methods"></span><h3 class="summary">Methods</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>class procedure <strong><a href="ArrayUtils.TArrayUtils.html#SetArrayLength">SetArrayLength</a></strong>&lt;T&gt;(var Arr: TArray&lt;T&gt;; NewLength: Integer); static;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>class procedure <strong><a href="ArrayUtils.TArrayUtils.html#CopyArray">CopyArray</a></strong>&lt;T&gt;(const Source: TArray&lt;T&gt;; var Dest: TArray&lt;T&gt;); static;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>class procedure <strong><a href="ArrayUtils.TArrayUtils.html#AddToArray">AddToArray</a></strong>&lt;T&gt;(var Arr: TArray&lt;T&gt;; const Item: T); static;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>class procedure <strong><a href="ArrayUtils.TArrayUtils.html#RemoveFromArray">RemoveFromArray</a></strong>&lt;T&gt;(var Arr: TArray&lt;T&gt;; Index: Integer); static;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>class function <strong><a href="ArrayUtils.TArrayUtils.html#ListToArray">ListToArray</a></strong>&lt;T&gt;(List: TList&lt;T&gt;): TArray&lt;T&gt;; static;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>class function <strong><a href="ArrayUtils.TArrayUtils.html#ArrayToList">ArrayToList</a></strong>&lt;T&gt;(Arr: TArray&lt;T&gt;): TList&lt;T&gt;; static;</code></td>
+</tr>
+</table>
+<h2 class="description">Description</h2>
+<h3 class="detail">Methods</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="SetArrayLength"></span><code>class procedure <strong>SetArrayLength</strong>&lt;T&gt;(var Arr: TArray&lt;T&gt;; NewLength: Integer); static;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Устанавливает длину массива и инициализирует его элементы</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="CopyArray"></span><code>class procedure <strong>CopyArray</strong>&lt;T&gt;(const Source: TArray&lt;T&gt;; var Dest: TArray&lt;T&gt;); static;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Копирует элементы из одного массива в другой</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="AddToArray"></span><code>class procedure <strong>AddToArray</strong>&lt;T&gt;(var Arr: TArray&lt;T&gt;; const Item: T); static;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Добавляет элемент в массив</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="RemoveFromArray"></span><code>class procedure <strong>RemoveFromArray</strong>&lt;T&gt;(var Arr: TArray&lt;T&gt;; Index: Integer); static;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Удаляет элемент из массива по индексу</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="ListToArray"></span><code>class function <strong>ListToArray</strong>&lt;T&gt;(List: TList&lt;T&gt;): TArray&lt;T&gt;; static;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Преобразует TList в TArray</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="ArrayToList"></span><code>class function <strong>ArrayToList</strong>&lt;T&gt;(Arr: TArray&lt;T&gt;): TList&lt;T&gt;; static;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Преобразует TArray в TList</p>
+</td></tr>
+</table>
+<hr><span class="appinfo"><em>Generated by <a href="https://pasdoc.github.io/">PasDoc 0.16.0</a>. </em>
+</span>
+</div></div></body></html>

@@ -1,0 +1,977 @@
+Образец шапки для модулей
+{
+  ┌───────────────────────────────────────────────────────────────────┐
+  │ Автор: Бегтин К.В. (Огнеяр)                                       │
+  │ Название проекта: Библиотека Дементора                            │
+  │ Лицензия: Freeware                                                │
+  │ Год создания: 2025                                                │
+  │ Версия: 3.4                                                       │
+  │                                                                   │
+  │ Назначение модуля:                                                │
+  │ Модуль BookTypes содержит определения типов данных для            │
+  │ представления информации о книгах и их сериальных частях.         │
+  │ Модуль также обеспечивает удобное управление данными              │
+  │ книгами, включая краткую информацию                               │
+  │ и полные метаданные.                                              │
+  └───────────────────────────────────────────────────────────────────┘
+}
+
+unit BaseEntityStorage;
+
+interface
+
+uses
+  System.Classes, System.SysUtils, System.Generics.Collections, System.JSON, System.IOUtils, System.Rtti, System.Math;
+
+type
+  TBaseEntity = class
+  private
+    FID: Integer;
+  public
+    property ID: Integer read FID write FID;
+  end;
+
+  TBaseEntityStorage<T: TBaseEntity, constructor> = class
+  private
+    FDataPath: string;
+    FCache: TObjectDictionary<Integer, T>;
+    FMaxCacheSize: Integer;
+    FRttiContext: TRttiContext;
+    function GetEntityFilePath(const AID: Integer): string;
+    function LoadEntityFromFile(const AID: Integer): T;
+    procedure SaveEntityToFile(const AEntity: T);
+    procedure EnsureCacheSize;
+    function GetNextID: Integer;
+    function EntityToJSON(const AEntity: T): TJSONObject;
+    procedure EntityFromJSON(const AEntity: T; const AJSONObj: TJSONObject);
+  public
+    constructor Create(const ADataPath: string; AMaxCacheSize: Integer = 100);
+    destructor Destroy; override;
+    // CRUD операции
+    function CreateEntity(const AEntity: T): Integer; virtual;
+    function ReadEntity(const AID: Integer): T; virtual;
+    procedure UpdateEntity(const AEntity: T); virtual;
+    procedure DeleteEntity(const AID: Integer); virtual;
+    // Дополнительные методы
+    function GetAllEntities: TObjectList<T>; virtual;
+    function FindEntityByProperty(const APropertyName: string; AValue: TValue): T; virtual;
+    // Универсальные методы для сериализации и десериализации JSON
+    function ToJSON(const AEntity: T): string;
+    procedure FromJSON(const AEntity: T; const AJSONString: string);
+  end;
+
+implementation
+
+{ TBaseEntityStorage<T> }
+
+constructor TBaseEntityStorage<T>.Create(const ADataPath: string; AMaxCacheSize: Integer);
+begin
+  inherited Create;
+  FDataPath := ADataPath;
+  FMaxCacheSize := AMaxCacheSize;
+  FCache := TObjectDictionary<Integer, T>.Create([doOwnsValues]);
+  FRttiContext := TRttiContext.Create;
+  if not TDirectory.Exists(FDataPath) then
+    TDirectory.CreateDirectory(FDataPath);
+end;
+
+destructor TBaseEntityStorage<T>.Destroy;
+begin
+  FCache.Free;
+  FRttiContext.Free;
+  inherited;
+end;
+
+function TBaseEntityStorage<T>.GetEntityFilePath(const AID: Integer): string;
+begin
+  Result := TPath.Combine(FDataPath, Format('%d.json', [AID]));
+end;
+
+function TBaseEntityStorage<T>.LoadEntityFromFile(const AID: Integer): T;
+var
+  jsonText: string;
+  jsonObj: TJSONObject;
+begin
+  var filePath := GetEntityFilePath(AID);
+  if not TFile.Exists(filePath) then
+    raise Exception.CreateFmt('Entity file not found: %d', [AID]);
+
+  try
+    jsonText := TFile.ReadAllText(filePath);
+  except
+    on E: Exception do
+      raise Exception.CreateFmt('Error reading entity file: %s', [E.Message]);
+  end;
+
+  jsonObj := TJSONObject.ParseJSONValue(jsonText) as TJSONObject;
+  if not Assigned(jsonObj) then
+    raise Exception.Create('Invalid JSON format');
+
+  try
+    Result := T.Create;
+    EntityFromJSON(Result, jsonObj);
+  finally
+    jsonObj.Free;
+  end;
+end;
+
+procedure TBaseEntityStorage<T>.SaveEntityToFile(const AEntity: T);
+var
+  jsonObj: TJSONObject;
+begin
+  jsonObj := EntityToJSON(AEntity);
+  try
+    TFile.WriteAllText(GetEntityFilePath(AEntity.ID), jsonObj.ToString);
+  finally
+    jsonObj.Free;
+  end;
+end;
+
+procedure TBaseEntityStorage<T>.EnsureCacheSize;
+var
+  keysToRemove: TList<Integer>;
+  i: Integer;
+begin
+  if FCache.Count > FMaxCacheSize then
+  begin
+    keysToRemove := TList<Integer>.Create;
+    try
+      for i := 0 to FCache.Count - FMaxCacheSize - 1 do
+        keysToRemove.Add(FCache.Keys.ToArray[i]);
+      for i := 0 to keysToRemove.Count - 1 do
+        FCache.Remove(keysToRemove[i]);
+    finally
+      keysToRemove.Free;
+    end;
+  end;
+end;
+
+function TBaseEntityStorage<T>.GetNextID: Integer;
+begin
+  Result := 1;
+  if FCache.Count > 0 then
+    Result := MaxIntValue(FCache.Keys.ToArray) + 1;
+end;
+
+function TBaseEntityStorage<T>.CreateEntity(const AEntity: T): Integer;
+begin
+  var newID := GetNextID;
+  AEntity.ID := newID;
+  FCache.Add(newID, AEntity);
+  SaveEntityToFile(AEntity);
+  EnsureCacheSize;
+  Result := newID;
+end;
+
+function TBaseEntityStorage<T>.ReadEntity(const AID: Integer): T;
+begin
+  if not FCache.TryGetValue(AID, Result) then
+  begin
+    Result := LoadEntityFromFile(AID);
+    FCache.Add(AID, Result);
+  end;
+end;
+
+procedure TBaseEntityStorage<T>.UpdateEntity(const AEntity: T);
+begin
+  SaveEntityToFile(AEntity);
+  FCache.AddOrSetValue(AEntity.ID, AEntity);
+  EnsureCacheSize;
+end;
+
+procedure TBaseEntityStorage<T>.DeleteEntity(const AID: Integer);
+begin
+  FCache.Remove(AID);
+  TFile.Delete(GetEntityFilePath(AID));
+end;
+
+function TBaseEntityStorage<T>.GetAllEntities: TObjectList<T>;
+begin
+  Result := TObjectList<T>.Create(False); // Не владеем объектами, так как они уже в кэше
+  for var entity in FCache.Values do
+    Result.Add(entity);
+end;
+
+function TBaseEntityStorage<T>.FindEntityByProperty(const APropertyName: string; AValue: TValue): T;
+var
+  rttiType: TRttiType;
+  prop: TRttiProperty;
+  entity: T;
+  value: TValue;
+begin
+  rttiType := FRttiContext.GetType(T);
+  prop := rttiType.GetProperty(APropertyName);
+  if not Assigned(prop) then
+    raise Exception.CreateFmt('Property "%s" not found in entity', [APropertyName]);
+  for entity in FCache.Values do
+  begin
+    value := prop.GetValue(TObject(entity));
+    if value.Kind = AValue.Kind then
+    begin
+      case value.Kind of
+        tkInteger, tkInt64:
+          if value.AsOrdinal = AValue.AsOrdinal then
+            Exit(entity);
+        tkChar, tkString, tkLString, tkWChar, tkWString, tkUnicodeString:
+          if value.AsString = AValue.AsString then
+            Exit(entity);
+        tkFloat:
+          if SameValue(value.AsExtended, AValue.AsExtended, 0.00001) then
+            Exit(entity);
+      end;
+    end;
+  end;
+  Result := nil;
+end;
+
+function TBaseEntityStorage<T>.ToJSON(const AEntity: T): string;
+var
+  JSONObject: TJSONObject;
+begin
+  JSONObject := EntityToJSON(AEntity);
+  try
+    Result := JSONObject.ToString;
+  finally
+    JSONObject.Free;
+  end;
+end;
+
+procedure TBaseEntityStorage<T>.FromJSON(const AEntity: T; const AJSONString: string);
+var
+  jsonObj: TJSONObject;
+begin
+  jsonObj := TJSONObject.ParseJSONValue(AJSONString) as TJSONObject;
+  try
+    EntityFromJSON(AEntity, jsonObj);
+  finally
+    jsonObj.Free;
+  end;
+end;
+
+function TBaseEntityStorage<T>.EntityToJSON(const AEntity: T): TJSONObject;
+var
+  JSONObject: TJSONObject;
+  rttiType: TRttiType;
+  prop: TRttiProperty;
+  value: TValue;
+begin
+  JSONObject := TJSONObject.Create;
+  try
+    rttiType := FRttiContext.GetType(T);
+    for prop in rttiType.GetProperties do
+    begin
+      if not Assigned(prop) then
+        Continue;
+      if prop.PropertyType.TypeKind in [tkInteger, tkInt64, tkChar, tkString, tkLString, tkWChar, tkWString, tkUnicodeString] then
+      begin
+        value := prop.GetValue(TObject(AEntity));
+        JSONObject.AddPair(prop.Name, value.ToString);
+      end;
+    end;
+    Result := JSONObject;
+  except
+    JSONObject.Free;
+    raise;
+  end;
+end;
+
+procedure TBaseEntityStorage<T>.EntityFromJSON(const AEntity: T; const AJSONObj: TJSONObject);
+var
+  rttiType: TRttiType;
+  prop: TRttiProperty;
+  value: TValue;
+  jsonValue: TJSONValue;
+  strValue: string;
+  objValue: TObject;
+begin
+  rttiType := FRttiContext.GetType(T);
+  for prop in rttiType.GetProperties do
+  begin
+    if not Assigned(prop) then
+      Continue;
+    if prop.PropertyType.TypeKind in [tkInteger, tkInt64, tkChar, tkString, tkLString, tkWChar, tkWString, tkUnicodeString] then
+    begin
+      if AJSONObj.TryGetValue(prop.Name, jsonValue) then
+      begin
+        strValue := jsonValue.Value;
+        case prop.PropertyType.TypeKind of
+          tkInteger:
+            begin
+              value := StrToInt(strValue);
+              objValue := TObject(AEntity);
+              prop.SetValue(objValue, value);
+            end;
+          tkInt64:
+            begin
+              value := StrToInt64(strValue);
+              objValue := TObject(AEntity);
+              prop.SetValue(objValue, value);
+            end;
+          tkChar, tkString, tkLString, tkWChar, tkWString, tkUnicodeString:
+            begin
+              value := strValue;
+              objValue := TObject(AEntity);
+              prop.SetValue(objValue, value);
+            end;
+        end;
+      end;
+    end;
+  end;
+end;
+
+end.
+
+---------------------------------
+{
+  ┌───────────────────────────────────────────────────────────────────┐
+  │ Автор: Бегтин К.В. (Огнеяр)                                       │
+  │ Название проекта: Библиотека Дементора                            │
+  │ Лицензия: Freeware                                                │
+  │ Год создания: 2025                                                │
+  │ Версия: 3.4                                                       │
+  │                                                                   │
+  │ Назначение модуля:                                                │
+  │ Модуль BookModel содержит методы для манипуляции переменными      │
+  │ типов, описанных в BookTypes.                                     │
+  │                                                                   │
+  │ История изменений:                                                │
+  │                                                                   │
+  └───────────────────────────────────────────────────────────────────┘
+}
+unit BookModel;
+
+interface
+
+uses
+  BookTypes, ListTypes, PublisherTypes, CommonTypes;
+
+type
+  TBookManipulation = class
+  public
+    // Методы для манипуляции данными
+    function CreateBook(const ABook: TBookMetadata): TBookMetadata;
+    function UpdateBook(const ABook: TBookMetadata): Boolean;
+    function DeleteBook(const ABookID: Integer): Boolean;
+    function GetBookByID(const ABookID: Integer): TBookMetadata;
+    // Добавьте другие методы по необходимости
+  end;
+
+implementation
+
+{ TBookManipulation }
+
+function TBookManipulation.CreateBook(const ABook: TBookMetadata): TBookMetadata;
+begin
+  // Логика создания книги
+  // Например, добавление в базу данных или файл
+  Result := ABook;
+end;
+
+function TBookManipulation.UpdateBook(const ABook: TBookMetadata): Boolean;
+begin
+  // Логика обновления книги
+  Result := True; // Или False в зависимости от результата
+end;
+
+function TBookManipulation.DeleteBook(const ABookID: Integer): Boolean;
+begin
+  // Логика удаления книги
+  Result := True; // Или False в зависимости от результата
+end;
+
+function TBookManipulation.GetBookByID(const ABookID: Integer): TBookMetadata;
+begin
+  // Логика получения книги по ID
+  // Здесь можно использовать BookStorage для загрузки данных
+  Result := TBookMetadata.Create;
+  Result.ID := ABookID;
+  Result.Title := 'Sample Title';
+  // Заполните другие поля
+end;
+
+end.
+
+------------------------------
+
+{
+  ┌───────────────────────────────────────────────────────────────────┐
+  │ Автор: Бегтин К.В. (Огнеяр)                                       │
+  │ Название проекта: Библиотека Дементора                             │
+  │ Лицензия: Freeware                                                │
+  │ Год создания: 2025                                                │
+  │ Версия: 3.4                                                       │
+  │                                                                   │
+  │ Назначение модуля:                                                │
+  │ Модуль BookTypes содержит определения типов данных для            │
+  │ представления метаданных о книгах и их сериальных частях.         │
+  │                                                                   │
+  │ История изменений:                                                │
+  └───────────────────────────────────────────────────────────────────┘
+}
+
+unit BookTypes;
+
+interface
+
+uses
+  System.SysUtils, System.Classes, System.Generics.Collections, System.JSON;
+
+type
+  // TBook - запись, представляющая книгу с полными метаданными
+  TBook = record
+    ID: Integer;          // Уникальный идентификатор книги
+    Title: string;        // Название книги
+    Author: string;       // Автор книги
+    Year: Integer;        // Год издания
+    Format: string;       // Формат книги (например, PDF, EPUB)
+    FilePath: string;     // Путь к файлу книги
+    CategoryID: Integer;  // Идентификатор категории
+    Tags: TArray<string>; // Теги книги
+    Series: TArray<TBookSeriesItem>; // Информация о серии книг
+    ISBN: string;         // Международный стандартный книжный номер
+    Publisher: string;    // Издательство
+    PageCount: Integer;   // Количество страниц
+    Language: string;     // Язык книги
+    Description: string;  // Описание книги
+    AddedDate: TDateTime;// Дата добавления книги
+    Rating: Integer;      // Рейтинг книги
+    ReadStatus: string;   // Статус чтения (например, "Прочитана", "В процессе")
+    Notes: string;        // Примечания
+    Keywords: string;     // Ключевые слова для поиска
+    CustomFields: TDictionary<string, string>; // Дополнительные поля
+  end;
+
+  // TBookMetadata - класс для работы с метаданными книги
+  TBookMetadata = class
+  private
+    FID: Integer;               // Уникальный идентификатор
+    FTitle: string;             // Название книги
+    FAuthor: string;            // Автор книги
+    FCategoryID: Integer;       // Идентификатор категории
+    FDescription: string;       // Описание книги
+    FYear: Integer;             // Год издания
+    FISBN: string;              // ISBN
+    FPublisher: string;         // Издательство
+    FPageCount: Integer;        // Количество страниц
+    FLanguage: string;          // Язык книги
+    FFormat: string;            // Формат книги
+    FFileSize: Int64;           // Размер файла
+    FFilePath: string;          // Путь к файлу
+    FCoverPath: string;         // Путь к обложке
+    FTags: TArray<string>;      // Теги
+    FAddedDate: TDateTime;      // Дата добавления
+    FNotes: string;             // Примечания
+    FRating: Integer;           // Рейтинг
+    FReadStatus: string;        // Статус чтения
+    FKeywords: string;          // Ключевые слова
+    FSeries: TArray<TBookSeriesItem>; // Серия
+    FCustomFields: TDictionary<string, string>; // Дополнительные поля
+    procedure SetSeries(ASeries: TArray<TBookSeriesItem>); // Установка серии
+  public
+    constructor Create;
+    destructor Destroy; override;
+
+    // Преобразование в JSON / из JSON
+    function ToJSON: string;
+    procedure FromJSON(const JSONString: string);
+
+    // Преобразование в TBookBrief
+    function ToBrief: TBookBrief; // Для списка книг в памяти
+
+    // Проверка наличия обложки
+    function HasCover: Boolean; // Есть ли обложка
+
+    // Количество элементов в серии
+    function GetSeriesCount: Integer; // Количество элементов в серии
+
+    // Получение элемента серии по индексу
+    function GetSeriesItem(Index: Integer): TBookSeriesItem; // Получение элемента серии
+
+    // Добавление элемента в серию
+    procedure AddSeriesItem(const AItem: TBookSeriesItem); // Добавление элемента в серию
+
+    // Удаление элемента из серии
+    procedure RemoveSeriesItem(const AIndex: Integer); // Удаление элемента из серии
+
+    property SeriesCount: Integer read GetSeriesCount; // Количество элементов в серии
+    property ID: Integer read FID write FID; // Уникальный идентификатор
+    property Title: string read FTitle write FTitle; // Название книги
+    property Author: string read FAuthor write FAuthor; // Автор книги
+    property CategoryID: Integer read FCategoryID write FCategoryID; // Идентификатор категории
+    property Description: string read FDescription write FDescription; // Описание книги
+    property Year: Integer read FYear write FYear; // Год издания
+    property ISBN: string read FISBN write FISBN; // ISBN
+    property Publisher: string read FPublisher write FPublisher; // Издательство
+    property PageCount: Integer read FPageCount write FPageCount; // Количество страниц
+    property Language: string read FLanguage write FLanguage; // Язык книги
+    property Format: string read FFormat write FFormat; // Формат книги
+    property FileSize: Int64 read FFileSize write FFileSize; // Размер файла
+    property FilePath: string read FFilePath write FFilePath; // Путь к файлу
+    property CoverPath: string read FCoverPath write FCoverPath; // Путь к обложке
+    property Tags: TArray<string> read FTags write FTags; // Теги
+    property AddedDate: TDateTime read FAddedDate write FAddedDate; // Дата добавления
+    property Notes: string read FNotes write FNotes; // Примечания
+    property Rating: Integer read FRating write FRating; // Рейтинг
+    property ReadStatus: string read FReadStatus write FReadStatus; // Статус чтения
+    property Keywords: string read FKeywords write FKeywords; // Ключевые слова
+    property Series: TArray<TBookSeriesItem> read FSeries write SetSeries; // Серия
+    property CustomFields: TDictionary<string, string> read FCustomFields; // Дополнительные поля
+
+    // Установка значения дополнительного поля
+    procedure SetCustomFieldsValue(const Key, Value: string);
+
+    // Установка дополнительных полей
+    procedure SetCustomFields(const ACustomFields: TDictionary<string, string>);
+  end;
+
+implementation
+
+{ TBookMetadata }
+
+constructor TBookMetadata.Create;
+begin
+  inherited;
+  FCustomFields := TDictionary<string, string>.Create;
+end;
+
+destructor TBookMetadata.Destroy;
+begin
+  FCustomFields.Free;
+  inherited;
+end;
+
+procedure TBookMetadata.SetSeries(ASeries: TArray<TBookSeriesItem>);
+begin
+  FSeries := ASeries;
+end;
+
+function TBookMetadata.ToBrief: TBookBrief;
+begin
+  Result.ID := FID;
+  Result.Title := FTitle;
+  Result.Author := FAuthor;
+  Result.Year := FYear;
+  Result.Format := FFormat;
+  Result.FilePath := FFilePath;
+  Result.CategoryID := FCategoryID;
+  Result.Tags := FTags;
+  Result.Series := FSeries;
+end;
+
+function TBookMetadata.HasCover: Boolean;
+begin
+  Result := not FCoverPath.IsEmpty;
+end;
+
+function TBookMetadata.GetSeriesCount: Integer;
+begin
+  Result := Length(FSeries);
+end;
+
+function TBookMetadata.GetSeriesItem(Index: Integer): TBookSeriesItem;
+begin
+  if (Index >= 0) and (Index < Length(FSeries)) then
+    Result := FSeries[Index]
+  else
+    raise Exception.Create('Index out of bounds');
+end;
+
+procedure TBookMetadata.AddSeriesItem(const AItem: TBookSeriesItem);
+var
+  tempSeries: TArray<TBookSeriesItem>;
+begin
+  SetLength(tempSeries, Length(FSeries) + 1);
+  if Length(FSeries) > 0 then
+    Move(FSeries[0], tempSeries[0], Length(FSeries) * SizeOf(TBookSeriesItem));
+  tempSeries[High(tempSeries)] := AItem;
+  FSeries := tempSeries;
+end;
+
+procedure TBookMetadata.RemoveSeriesItem(const AIndex: Integer);
+var
+  tempSeries: TArray<TBookSeriesItem>;
+  i: Integer;
+begin
+  if (AIndex >= 0) and (AIndex < Length(FSeries)) then
+  begin
+    SetLength(tempSeries, Length(FSeries) - 1);
+    for i := 0 to High(tempSeries) do
+      if i < AIndex then
+        tempSeries[i] := FSeries[i]
+      else
+        tempSeries[i] := FSeries[i + 1];
+    FSeries := tempSeries;
+  end
+  else
+    raise Exception.Create('Index out of bounds');
+end;
+
+procedure TBookMetadata.SetCustomFields(const ACustomFields: TDictionary<string, string>);
+begin
+  FCustomFields.Clear;
+  for var pair in ACustomFields do
+    FCustomFields.Add(pair.Key, pair.Value);
+end;
+
+procedure TBookMetadata.SetCustomFieldsValue(const Key, Value: string);
+begin
+  FCustomFields.AddOrSetValue(Key, Value);
+end;
+
+function TBookMetadata.ToJSON: string;
+var
+  JSONObject: TJSONObject;
+  SeriesArray: TJSONArray;
+  SeriesItemObject: TJSONObject;
+  CustomFieldsArray: TJSONArray;
+  CustomFieldObject: TJSONObject;
+  Tag: string;
+begin
+  JSONObject := TJSONObject.Create;
+  try
+    JSONObject.AddPair('ID', TJSONNumber.Create(FID));
+    JSONObject.AddPair('Title', FTitle);
+    JSONObject.AddPair('Author', FAuthor);
+    JSONObject.AddPair('CategoryID', TJSONNumber.Create(FCategoryID));
+    JSONObject.AddPair('Description', FDescription);
+    JSONObject.AddPair('Year', TJSONNumber.Create(FYear));
+    JSONObject.AddPair('ISBN', FISBN);
+    JSONObject.AddPair('Publisher', FPublisher);
+    JSONObject.AddPair('PageCount', TJSONNumber.Create(FPageCount));
+    JSONObject.AddPair('Language', FLanguage);
+    JSONObject.AddPair('Format', FFormat);
+    JSONObject.AddPair('FileSize', TJSONNumber.Create(FFileSize));
+    JSONObject.AddPair('FilePath', FFilePath);
+    JSONObject.AddPair('CoverPath', FCoverPath);
+    JSONObject.AddPair('AddedDate', TJSONNumber.Create(FAddedDate));
+    JSONObject.AddPair('Notes', FNotes);
+    JSONObject.AddPair('Rating', TJSONNumber.Create(FRating));
+    JSONObject.AddPair('ReadStatus', FReadStatus);
+    JSONObject.AddPair('Keywords', FKeywords);
+
+    // 
+    SeriesArray := TJSONArray.Create;
+    for var seriesItem in FSeries do
+    begin
+      SeriesItemObject := TJSONObject.Create;
+//      SeriesItemObject.AddPair('Title', seriesItem.Title);
+//      SeriesItemObject.AddPair('Number', TJSONNumber.Create(seriesItem.Number));
+      SeriesArray.AddElement(SeriesItemObject);
+    end;
+    JSONObject.AddPair('Series', SeriesArray);
+
+    //  
+    CustomFieldsArray := TJSONArray.Create;
+    for var customField in FCustomFields do
+    begin
+      CustomFieldObject := TJSONObject.Create;
+      CustomFieldObject.AddPair('Key', customField.Key);
+      CustomFieldObject.AddPair('Value', customField.Value);
+      CustomFieldsArray.AddElement(CustomFieldObject);
+    end;
+    JSONObject.AddPair('CustomFields', CustomFieldsArray);
+
+    // 
+    Tag := '';
+    for var tagItem in FTags do
+    begin
+      Tag := Tag + tagItem + ',';
+    end;
+    if Tag <> '' then
+      Tag := Copy(Tag, 1, Length(Tag) - 1);
+    JSONObject.AddPair('Tags', Tag);
+
+    Result := JSONObject.ToString;
+  finally
+    JSONObject.Free;
+  end;
+end;
+
+procedure TBookMetadata.FromJSON(const JSONString: string);
+var
+  JSONObject: TJSONObject;
+  SeriesArray: TJSONArray;
+  SeriesItemObject: TJSONObject;
+  CustomFieldsArray: TJSONArray;
+  CustomFieldObject: TJSONObject;
+  TagArray: TArray<string>;
+  i: Integer;
+begin
+  JSONObject := TJSONObject.ParseJSONValue(JSONString) as TJSONObject;
+  try
+    FID := JSONObject.GetValue<Integer>('ID');
+    FTitle := JSONObject.GetValue<string>('Title');
+    FAuthor := JSONObject.GetValue<string>('Author');
+    FCategoryID := JSONObject.GetValue<Integer>('CategoryID');
+    FDescription := JSONObject.GetValue<string>('Description');
+    FYear := JSONObject.GetValue<Integer>('Year');
+    FISBN := JSONObject.GetValue<string>('ISBN');
+    FPublisher := JSONObject.GetValue<string>('Publisher');
+    FPageCount := JSONObject.GetValue<Integer>('PageCount');
+    FLanguage := JSONObject.GetValue<string>('Language');
+    FFormat := JSONObject.GetValue<string>('Format');
+    FFileSize := JSONObject.GetValue<Int64>('FileSize');
+    FFilePath := JSONObject.GetValue<string>('FilePath');
+    FCoverPath := JSONObject.GetValue<string>('CoverPath');
+    FTags := JSONObject.GetValue<TArray<string>>('Tags');
+    FAddedDate := JSONObject.GetValue<TDateTime>('AddedDate');
+    FNotes := JSONObject.GetValue<string>('Notes');
+    FRating := JSONObject.GetValue<Integer>('Rating');
+    FReadStatus := JSONObject.GetValue<string>('ReadStatus');
+    FKeywords := JSONObject.GetValue<string>('Keywords');
+
+    // 
+    SeriesArray := JSONObject.GetValue<TJSONArray>('Series');
+    SetLength(FSeries, SeriesArray.Count);
+    for i := 0 to SeriesArray.Count - 1 do
+    begin
+      SeriesItemObject := SeriesArray.Items[i] as TJSONObject;
+//      FSeries[i].Title := SeriesItemObject.GetValue<string>('Title');
+//      FSeries[i].Number := SeriesItemObject.GetValue<Integer>('Number');
+    end;
+
+    //  
+    CustomFieldsArray := JSONObject.GetValue<TJSONArray>('CustomFields');
+    FCustomFields.Clear;
+    for i := 0 to CustomFieldsArray.Count - 1 do
+    begin
+      CustomFieldObject := CustomFieldsArray.Items[i] as TJSONObject;
+      FCustomFields.Add(CustomFieldObject.GetValue<string>('Key'), CustomFieldObject.GetValue<string>('Value'));
+    end;
+  finally
+    JSONObject.Free;
+  end;
+end;
+
+end.
+----------------------------------
+{
+  ┌───────────────────────────────────────────────────────────────────┐
+  │ Автор: Бегтин К.В. (Огнеяр)                                       │
+  │ Название проекта: Библиотека Дементора                            │
+  │ Лицензия: Freeware                                                │
+  │ Год создания: 2025                                                │
+  │ Версия: 3.4                                                       │
+  │                                                                   │
+  │ Назначение модуля:                                                │
+  │ Модуль BriefTypes содержит определения типов данных для           │
+  │ представления списка книг в памяти.                               │
+  │                                                                   │
+  │ История изменений:                                                │
+  │ [2025-01-20]: Создание модуля с типом TBookBrief.                 │
+  │                                                                   │
+  └───────────────────────────────────────────────────────────────────┘
+}
+
+unit BriefTypes;
+
+
+interface
+
+uses
+  System.Classes, System.SysUtils, System.Generics.Collections,
+  System.Generics.Defaults, CommonTypes, System.Math,BaseEntityStorage;
+
+type
+  // TBookBrief - класс для представления краткой информации о книге
+  TBookBrief = class(TBaseEntity)
+  private
+    FTitle: string;       // Название книги
+    FAuthor: string;      // Автор книги
+    FYear: Integer;       // Год издания
+    FFormat: string;      // Формат книги
+    FFilePath: string;    // Путь к файлу книги
+    FCategoryID: Integer; // Идентификатор категории
+    FTags: TArray<string>; // Теги книги
+    FSeries: TArray<TBookSeriesItem>; // Серия книги
+  public
+    property Title: string read FTitle write FTitle; // Название книги
+    property Author: string read FAuthor write FAuthor; // Автор книги
+    property Year: Integer read FYear write FYear; // Год издания
+    property Format: string read FFormat write FFormat; // Формат книги
+    property FilePath: string read FFilePath write FFilePath; // Путь к файлу
+    property CategoryID: Integer read FCategoryID write FCategoryID; // Идентификатор категории
+    property Tags: TArray<string> read FTags write FTags; // Теги
+    property Series: TArray<TBookSeriesItem> read FSeries write FSeries; // Серия
+  end;
+
+  // TBookBriefList - список книг
+  TBookBriefList = class(TList<TBookBrief>)
+  private
+    function CompareBooks(const Left, Right: TBookBrief;
+      const AField: TListSortField; const AOrder: TListSortOrder): Integer;
+  public
+    function FindByID(const AID: Integer): TBookBrief;
+    function FindByTitle(const ATitle: string): TBookBrief;
+    function FindByAuthor(const AAuthor: string): TBookBrief;
+    procedure Sort(const AField: TListSortField; const AOrder: TListSortOrder = soAscending);
+  end;
+
+implementation
+
+uses
+  System.StrUtils;
+
+{ TBookBriefList }
+
+function TBookBriefList.FindByID(const AID: Integer): TBookBrief;
+begin
+  for var Book in Self do
+    if Book.ID = AID then
+      Exit(Book);
+  raise Exception.CreateFmt('Book not found with ID: %d', [AID]);
+end;
+
+function TBookBriefList.FindByTitle(const ATitle: string): TBookBrief;
+begin
+  for var Book in Self do
+    if AnsiContainsText(Book.Title, ATitle) then
+      Exit(Book);
+  raise Exception.CreateFmt('Book not found with title: %s', [ATitle]);
+end;
+
+function TBookBriefList.FindByAuthor(const AAuthor: string): TBookBrief;
+begin
+  for var Book in Self do
+    if AnsiContainsText(Book.Author, AAuthor) then
+      Exit(Book);
+  raise Exception.CreateFmt('Book not found with author: %s', [AAuthor]);
+end;
+
+function TBookBriefList.CompareBooks(const Left, Right: TBookBrief;
+  const AField: TListSortField; const AOrder: TListSortOrder): Integer;
+begin
+  case AField of
+    sfTitle:
+      Result := CompareText(Left.Title, Right.Title);
+    sfAuthor:
+      Result := CompareText(Left.Author, Right.Author);
+    sfYear:
+      Result := CompareValue(Left.Year, Right.Year);
+    else
+      Result := 0;
+  end;
+  if AOrder = soDescending then
+    Result := -Result;
+end;
+
+procedure TBookBriefList.Sort(const AField: TListSortField; const AOrder: TListSortOrder = soAscending);
+begin
+  inherited Sort(
+    TComparer<TBookBrief>.Construct(
+      function(const Left, Right: TBookBrief): Integer
+      begin
+        Result := CompareBooks(Left, Right, AField, AOrder);
+      end)
+  );
+end;
+
+end.
+----------------------------------
+{
+  ┌───────────────────────────────────────────────────────────────────┐
+  │ Автор: Бегтин К.В. (Огнеяр)                                       │
+  │ Название проекта: Библиотека Дементора                             │
+  │ Лицензия: Freeware                                                │
+  │ Год создания: 2025                                                │
+  │ Версия: 3.4                                                       │
+  │                                                                   │
+  │ Назначение модуля:                                                │
+  │ Модуль SeriesTypes содержит определения типов данных для           │
+  │ представления информации о сериях книг.                           │
+  │                                                                   │
+  │ История изменений:                                                │
+  │ [2025-01-30]: Создание модуля с типами TBookSeriesItem и          │
+  │               TBookSeries.                                        │
+  │                                                                   │
+  └───────────────────────────────────────────────────────────────────┘
+}
+
+unit SeriesTypes;
+
+interface
+
+uses
+  System.SysUtils, System.Classes;
+//todo переделать в классы от TBaseEntity
+type
+  // TBookSeriesItem - запись, представляющая элемент серии книг
+  TBookSeriesItem = record
+    BookID: Integer;      // Идентификатор книги
+    SeriesID: Integer;    // Идентификатор серии
+    BookNumber: Integer;  // Номер книги в серии
+    procedure Initialize(ABookID, ASeriesID, ABookNumber: Integer);
+  end;
+
+  // TBookSeries - запись, представляющая серию книг
+  TBookSeries = record
+    ID: Integer;          // Уникальный идентификатор серии
+    Name: string;         // Название серии
+    Publisher: string;    // Издательство
+    Description: string;  // Описание серии
+    procedure Initialize(const AID: Integer; const AName, APublisher, ADescription: string);
+  end;
+
+implementation
+
+{ TBookSeriesItem }
+
+procedure TBookSeriesItem.Initialize(ABookID, ASeriesID, ABookNumber: Integer);
+begin
+  BookID := ABookID;
+  SeriesID := ASeriesID;
+  BookNumber := ABookNumber;
+end;
+
+{ TBookSeries }
+
+procedure TBookSeries.Initialize(const AID: Integer; const AName, APublisher, ADescription: string);
+begin
+  ID := AID;
+  Name := AName;
+  Publisher := APublisher;
+  Description := ADescription;
+end;
+
+end.
+-----------------------------
+{
+  ┌───────────────────────────────────────────────────────────────────┐
+  │ Автор: Бегтин К.В. (Огнеяр)                                       │
+  │ Название проекта: Библиотека Дементора                             │
+  │ Лицензия: Freeware                                                │
+  │ Год создания: 2025                                                │
+  │ Версия: 3.4                                                       │
+  │                                                                   │
+  │ Назначение модуля:                                                │
+  │ Модуль PublisherTypes содержит определения типов данных для         │
+  │ представления информации об издателях.                            │
+  │                                                                   │
+  │ История изменений:                                                │
+  │ [2025-02-05]: Создание модуля с типом TPublisher.                  │
+  │                                                                   │
+  └───────────────────────────────────────────────────────────────────┘
+}
+
+unit PublisherTypes;
+
+interface
+
+uses
+  System.SysUtils, System.Classes;
+//todo переделать в классы от TBaseEntity
+
+type
+  // TPublisher - запись, представляющая издателя
+  TPublisher = record
+    ID: Integer;          // Уникальный идентификатор издателя
+    Name: string;         // Название издателя
+    Address: string;      // Адрес издателя
+    // Добавьте другие поля по необходимости
+  end;
+
+implementation
+
+end.
+-----------------------------
+Будут возможно и другие, в том числе, потомки TBaseEntity
